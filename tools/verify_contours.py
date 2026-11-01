@@ -11,7 +11,7 @@ import numpy as np
 from scipy.interpolate import RegularGridInterpolator
 import hyd as h
 import hyd_contours as c
-from numerical_checks import state_checks
+from numerical_checks import verification_exit_code
 from run_metadata import prepare_output,record_run
 
 
@@ -50,6 +50,7 @@ def main(workflow,out):
             w=csv.DictWriter(f,fieldnames=list(rows[0]));w.writeheader();w.writerows(rows)
         meta['verification_status']='PASS' if all(r['passed'] for r in rows) else 'FAIL'
         print('Contour verification:',meta['verification_status'],flush=True)
+    return verification_exit_code(meta)
 
 if __name__=='__main__':
-    ap=argparse.ArgumentParser();ap.add_argument('--workflow',required=True);ap.add_argument('--out',required=True);a=ap.parse_args();main(a.workflow,a.out)
+    ap=argparse.ArgumentParser();ap.add_argument('--workflow',required=True);ap.add_argument('--out',required=True);a=ap.parse_args();raise SystemExit(main(a.workflow,a.out))

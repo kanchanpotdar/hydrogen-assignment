@@ -1,6 +1,11 @@
 """Saved-state physical checks; never projects, clips or changes reactor states."""
 import numpy as np
 
+
+def verification_exit_code(manifest):
+    """Execution completion alone must never turn a failed verification into success."""
+    return 0 if manifest.get('verification_status') == 'PASS' else 1
+
 ATOM_MATRIX = np.array([[1,0,1,1,0,0], [4,2,0,0,2,0],
                         [0,1,1,2,0,0], [0,0,0,0,0,1]])
 

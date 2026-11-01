@@ -5,6 +5,7 @@ ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
 import numpy as np
 from scipy.integrate import solve_ivp
 import hyd as h
+from numerical_checks import verification_exit_code
 from run_metadata import prepare_output,record_run
 
 
@@ -35,6 +36,7 @@ def main(workflow,out):
         with (out/'axial_resolution.csv').open('w',newline='') as f:
             writer=csv.DictWriter(f,fieldnames=list(rows[0]));writer.writeheader();writer.writerows(rows)
         meta['verification_status']='PASS' if all(r['passed'] for r in rows if r['PBR_saved_points']==stored_n) else 'FAIL'
+    return verification_exit_code(meta)
 
 if __name__=='__main__':
-    ap=argparse.ArgumentParser();ap.add_argument('--workflow',required=True);ap.add_argument('--out',required=True);a=ap.parse_args();main(a.workflow,a.out)
+    ap=argparse.ArgumentParser();ap.add_argument('--workflow',required=True);ap.add_argument('--out',required=True);a=ap.parse_args();raise SystemExit(main(a.workflow,a.out))

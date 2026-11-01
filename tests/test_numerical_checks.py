@@ -18,7 +18,30 @@ class RawStateTests(unittest.TestCase):
             r=self.fixture();r['PR2'][1][row,-1]*=1.01
             self.assertFalse(state_checks(r)['passed'])
 
+class ContourSamplingTests(unittest.TestCase):
+    def test_refined_axial_resolution_is_used(self):
+        from unittest.mock import patch
+        import hyd_contours as c
+        fixture=RawStateTests().fixture()
+        with patch.object(c.hyd,'run',return_value=fixture) as call:
+            fields=c._axial(('HMMC',853.))
+            self.assertEqual(call.call_args.kwargs['n'],3200)
+            self.assertEqual(np.asarray(fields).shape,(6,241))
+    def test_invalid_operating_state_is_not_hidden(self):
+        from unittest.mock import patch
+        import hyd_contours as c
+        fixture=RawStateTests().fixture();fixture['PBR'][1][0,1]=-1e-6
+        with patch.object(c.hyd,'run',return_value=fixture):
+            with self.assertRaises(RuntimeError):c._point(('HMMC',853.,120.))
+
+
 class VerificationVerdictTests(unittest.TestCase):
+    def test_exit_status_requires_explicit_verification_pass(self):
+        from numerical_checks import verification_exit_code
+        self.assertEqual(verification_exit_code({'status':'COMPLETED','verification_status':'PASS'}),0)
+        self.assertEqual(verification_exit_code({'status':'COMPLETED','verification_status':'FAIL'}),1)
+        self.assertEqual(verification_exit_code({'status':'COMPLETED'}),1)
+
     def test_failed_sampling_check_stays_failed(self):
         from tools.verify_numerics import verification_passed
         yes=[{'passed':True}];no=[{'passed':False}]

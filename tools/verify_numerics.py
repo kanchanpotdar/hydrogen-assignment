@@ -13,7 +13,7 @@ import numpy as np
 from scipy.integrate import solve_ivp, simpson
 from scipy.optimize import minimize_scalar
 import hyd as h
-from numerical_checks import state_checks
+from numerical_checks import state_checks, verification_exit_code
 from run_metadata import prepare_output, record_run
 
 
@@ -162,7 +162,7 @@ def main(out):
             (out/'state_checks.json').write_text(json.dumps(sanity,indent=2)+'\n');(out/'failures.json').write_text(json.dumps(failures,indent=2)+'\n')
         manifest['verification_status']='PASS' if verification_passed(comparisons,energy,sanity,failures) else 'FAIL'
         print('Numerical verification status:',manifest['verification_status'],flush=True)
-    return 0 if manifest['verification_status']=='PASS' else 1
+    return verification_exit_code(manifest)
 
 
 if __name__=='__main__':
