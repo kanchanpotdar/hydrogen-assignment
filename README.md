@@ -3,6 +3,41 @@
 Python reproduction of the paper's 1-D steady-state SMR model (PBR → P-R1 → P-R2), its validation against Fig. 4
 (853 K, 120 mL/min, 5 % CH₄ / 20 % H₂O / 75 % He), and extra contour analysis.
 
+## Selected V3 baseline figures
+
+These are preserved historical V3 outputs, not newly verified runs. Scientific
+qualification and reproduction evidence are recorded in `docs/phase1/`.
+
+### Figure 4 comparison
+
+![V3 simulation, digitized published PBR curves, and experimental outlet points](results/validation_fig4_overlay.png)
+
+Experimental symbols represent the full 40 mm P-R2 outlet, displayed at the end
+of the shortened plotting segment. Thick reference curves cover the PBR only.
+
+### Species and temperature profiles
+
+![V3 axial species and temperature profiles for all three catalysts](results/01_smr_results.png)
+
+The horizontal coordinate omits the simulated 50 mm P-R1 section.
+
+### Existing heat-transfer sensitivity
+
+![V3 sensitivity to the length used to convert Nusselt number to heat-transfer coefficient](results/h_length_comparison.png)
+
+The existing particle option changes only the Nu-to-h length; Reynolds number
+remains based on tube diameter. This figure does not compare two complete
+characteristic-length conventions.
+
+### Operating-condition predictions
+
+![V3 operating-window predictions](results/contours_operating_window.png)
+
+The image's validation wording is a known historical limitation: supplied
+Figure 4 validation covers 853 K and 120 mL/min only. The 80 mL/min star marks a
+paper experimental condition, not an independently validated case here.
+These are operating-condition maps from a 1-D model, not radial–axial CFD fields.
+
 ## Folder contents (keep together)
 
 | File | Purpose |
