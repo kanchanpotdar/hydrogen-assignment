@@ -1,0 +1,81 @@
+{
+  "stage": "numerical_verification",
+  "status": "COMPLETED",
+  "started_utc": "2026-11-01T17:17:48.868365+00:00",
+  "argv": [
+    "tools/verify_numerics.py",
+    "--out",
+    "phase4_runs/2026-11-01-numerics-refined"
+  ],
+  "cwd": "/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model",
+  "output_directory": "/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/phase4_runs/2026-11-01-numerics-refined",
+  "python": "3.11.1 (v3.11.1:a7a450f84a, Dec  6 2022, 15:24:06) [Clang 13.0.0 (clang-1300.0.29.30)]",
+  "executable": "/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/.venv-phase1/bin/python",
+  "platform": "macOS-26.5.1-arm64-arm-64bit",
+  "dependencies": {
+    "numpy": "2.2.6",
+    "scipy": "1.15.3",
+    "matplotlib": "3.10.3"
+  },
+  "git_commit": "2e8782cb972f4db04cb595dd7603cc4e18f909af",
+  "git_status": "?? phase4_runs/",
+  "settings": {
+    "configuration": "v3_reproduction",
+    "protocol": "docs/phase4/acceptance_criteria.md"
+  },
+  "source_data_sha256": {
+    "compare_h_length.py": "4a494a69241c5e114c8be672ed2629d17d7f04685d61f987f7db7fa6cb154b26",
+    "data/fig4_digitized_curves.csv": "4560c6d773e1cf5a2f53be20605c4fbcb111bd85adae07950e5dfd5ad998aadf",
+    "data/fig4_experimental_points.csv": "51f7648d8e8b9a640281823449413e317f440797c762476d8f48cde1eaee4564",
+    "hyd.py": "95480de0d87d1a628c9e0f11558a5222bc08e4610650c610535109cc1ceefd02",
+    "hyd_contours.py": "778f94ca4306f522ff34b1e4e5e6b1b4e7af2f7c1135514b9ab2f69f24c58713",
+    "numerical_checks.py": "d20c6e2a6bdd474a023bb015d7fd2ed7efc46c026979672ba9387e581f70e703",
+    "run_all.py": "8a1480290dffb527ddf7ed1bf6f18f0c0ce85f12c72d107bec4d4d1f9509190e",
+    "run_metadata.py": "6261e55b149236b206ad2d44eeb8a43a2bfad0a0c8db6683c8d716cc7fde59c3",
+    "tools/baseline_regression.py": "30e7e5c90f6673ae6a8e3e32d8008dab08f3c6e50fc52994abcc13a1c1846785",
+    "tools/compare_transport.py": "45edf244daea96fe83600f4fc6c800be53cf1fe1e5bbe2209875b7c0b1c925e7",
+    "tools/reproduce_phase1.py": "6bc39006a091fb9bcee9f9dac17b2d6b934bafd82c5b82ad5bca9bcfd440485d",
+    "tools/verify_contours.py": "938ea777763030582ade2cdc82ae91a7d6801f4217e7655914418f83da52e45a",
+    "tools/verify_numerics.py": "3414dbe02078d2f16417d2c1aa7a4c3080c02748132e18b6b981ca6862468140",
+    "tools/verify_phase3.py": "f6d2349434b527faf217a7c85b397683c697f07cdcadce096d6cc51fd8f31ed2",
+    "validation.py": "fe91d91d003e22c0ce0cf3db24a0b5cd058b257f4e8d831f0297e359c1f49812"
+  },
+  "baseline_exact_regression": {
+    "HMMC": true,
+    "57-4Q": true,
+    "25-4Q": true
+  },
+  "verification_status": "FAIL",
+  "finished_utc": "2026-11-01T17:18:32.361156+00:00",
+  "output_sha256": {
+    "comparison_results.csv": "5947ee715dd2c3abbd32d0c49a032f497d550a4736fc0d095906dbabe0313909",
+    "energy_balance.csv": "fdd579a5efe326d935482313a598310dbe3e6332bda0616c42b437cd2207b3cf",
+    "failures.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "minimum_temperatures.csv": "46a84a3d4bba08f08d4a315fa1171252c0926a8fc8882069c67257bcd5b9fb21",
+    "profiles_25-4Q_Radau_0.1.npz": "4ee700bc2b65dbe8e72b0ab461840efef898eab23a549bfb546f847e5916aee0",
+    "profiles_25-4Q_energy_tol_0.001.npz": "7f9f073bae421867a08f64955e8fec4c0f65421a871c636227330725b98fb765",
+    "profiles_25-4Q_seed_1e-10.npz": "a20820b043f1e0e2215badef13f7f48e8204a0cf618da393d84df852bbdd5efd",
+    "profiles_25-4Q_seed_1e-12.npz": "de80aa3a1a14e2fee976b97b09925f862be3d40ad77a8229d5b2a936d29fe1e9",
+    "profiles_25-4Q_seed_1e-8.npz": "94e93bd61bb6b7cb2a79ba2407cf79796eb5f17e841b739ac40774cd5d772cc6",
+    "profiles_25-4Q_tol_0.01.npz": "198c458ff3714b51ba319d55d5d7e97561fa02e5efa8a61a9dcc644dd3c6e380",
+    "profiles_25-4Q_tol_0.1.npz": "54aa7cf737292a4e261a3ac4e5978a34dc634e09075f8fb2d1a7b11c15ae8a23",
+    "profiles_25-4Q_tol_1.npz": "e20d6accb7b0b14067283b7ea96c036b31edc1edceb8fcd4c3f3728d8bd055c3",
+    "profiles_57-4Q_Radau_0.1.npz": "97636fb195c8e2a89ffd1b7a50af04070891270ec0857abb2441dce40464d39b",
+    "profiles_57-4Q_energy_tol_0.001.npz": "d5b3915b0d79cb3d2ea7a918ec45229a4bf5ecf751326824eac36de2443027bb",
+    "profiles_57-4Q_seed_1e-10.npz": "d47f063793342912c7ddc90af5bd078da2852a8f2d07d1198f2dc9f35d346d11",
+    "profiles_57-4Q_seed_1e-12.npz": "8bb83daca175909234b6d7239b3c0dcbcdc70947690fb1e270302d02bfeccd39",
+    "profiles_57-4Q_seed_1e-8.npz": "2117f10aab2d10ad5c74c7169f4eb4a90bf0e3e011c972d97b25833f5904d52f",
+    "profiles_57-4Q_tol_0.01.npz": "9eec1d32298bad10e9f640f394fa31c574970b273d4d4dcb3fdbe0a256f37b5c",
+    "profiles_57-4Q_tol_0.1.npz": "cc6972d280ccf4546a3219e4d8afc21c4b39b8c82671faced778dba691512be4",
+    "profiles_57-4Q_tol_1.npz": "457204d9a4609dece938ff9b8fc083aeffcdd2c509fbd64a66a1f9da8785918a",
+    "profiles_HMMC_Radau_0.1.npz": "7bbb472c6f7ed62a1860e599304acf4c62025b27d17ff7c98acbbce1dc5804fc",
+    "profiles_HMMC_energy_tol_0.001.npz": "d48a9216a8f9a0962efca1214796f240019cd380b80241efb5b662f195fbee07",
+    "profiles_HMMC_seed_1e-10.npz": "c30a8d17ac5aca7c15347db08e7536d3af7b5e18d0764af2291e9d807da958ad",
+    "profiles_HMMC_seed_1e-12.npz": "5ef5f9080110a10c9fc665c5c95926e914dac28a8a290949accbc9b61225de61",
+    "profiles_HMMC_seed_1e-8.npz": "7b80a8a22bcdea0b360c108b0a8ef2028b5f45eb120770f7feba364d3ecdf5eb",
+    "profiles_HMMC_tol_0.01.npz": "5798c5d0cd4cc20cc2a67b90418b2b718a31444c814122f98be66bf01a20b71a",
+    "profiles_HMMC_tol_0.1.npz": "247354e2b60343c66808eaefc799ad1f0d3f8a354c20019d84bd84c363f99d97",
+    "profiles_HMMC_tol_1.npz": "b8146ef8e4cd5318fe5abf1024e048ef968f6496c1661dfade84d78a5cb4059a",
+    "state_checks.json": "ec2d72bbcea3e606181d0613422deb322ac0aa011bd4ef735a73df99c9097b52"
+  }
+}

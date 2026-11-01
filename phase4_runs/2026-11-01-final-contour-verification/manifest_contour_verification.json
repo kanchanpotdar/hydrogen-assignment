@@ -1,0 +1,68 @@
+{
+  "stage": "contour_verification",
+  "status": "COMPLETED",
+  "started_utc": "2026-11-01T17:24:01.071357+00:00",
+  "argv": [
+    "tools/verify_contours.py",
+    "--workflow",
+    "phase4_runs/2026-11-01-final-workflow",
+    "--out",
+    "phase4_runs/2026-11-01-final-contour-verification"
+  ],
+  "cwd": "/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model",
+  "output_directory": "/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/phase4_runs/2026-11-01-final-contour-verification",
+  "python": "3.11.1 (v3.11.1:a7a450f84a, Dec  6 2022, 15:24:06) [Clang 13.0.0 (clang-1300.0.29.30)]",
+  "executable": "/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/.venv-phase1/bin/python",
+  "platform": "macOS-26.5.1-arm64-arm-64bit",
+  "dependencies": {
+    "numpy": "2.2.6",
+    "scipy": "1.15.3",
+    "matplotlib": "3.10.3"
+  },
+  "git_commit": "958b8930ac2ee0108ddfe623f2ba213aab8a2b9d",
+  "git_status": "?? docs/phase4/dependency_check.txt\n?? docs/phase4/test_results.txt\n?? phase4_runs/",
+  "settings": {
+    "source_contours": "/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/phase4_runs/2026-11-01-final-workflow/contours",
+    "reference_tolerance_factor": 0.01
+  },
+  "source_data_sha256": {
+    "compare_h_length.py": "4a494a69241c5e114c8be672ed2629d17d7f04685d61f987f7db7fa6cb154b26",
+    "data/fig4_digitized_curves.csv": "4560c6d773e1cf5a2f53be20605c4fbcb111bd85adae07950e5dfd5ad998aadf",
+    "data/fig4_experimental_points.csv": "51f7648d8e8b9a640281823449413e317f440797c762476d8f48cde1eaee4564",
+    "hyd.py": "95480de0d87d1a628c9e0f11558a5222bc08e4610650c610535109cc1ceefd02",
+    "hyd_contours.py": "297f65ee603fbb43e36bb2d12d66fb302171de9d213816038f23ef8461831988",
+    "numerical_checks.py": "d20c6e2a6bdd474a023bb015d7fd2ed7efc46c026979672ba9387e581f70e703",
+    "run_all.py": "8a1480290dffb527ddf7ed1bf6f18f0c0ce85f12c72d107bec4d4d1f9509190e",
+    "run_metadata.py": "6261e55b149236b206ad2d44eeb8a43a2bfad0a0c8db6683c8d716cc7fde59c3",
+    "tools/baseline_regression.py": "30e7e5c90f6673ae6a8e3e32d8008dab08f3c6e50fc52994abcc13a1c1846785",
+    "tools/check_axial_resolution.py": "b059c4316d4fa037363f59557863ca67c471e1579703b4756e5c562403c4251b",
+    "tools/compare_transport.py": "45edf244daea96fe83600f4fc6c800be53cf1fe1e5bbe2209875b7c0b1c925e7",
+    "tools/reproduce_phase1.py": "6bc39006a091fb9bcee9f9dac17b2d6b934bafd82c5b82ad5bca9bcfd440485d",
+    "tools/verify_contours.py": "4ad98674bed5ae6965b8549bd9d8d62f9c831fb9690873e8168c2f23b0811d85",
+    "tools/verify_numerics.py": "ba9d271b6bd22f689ebf97b5e2eb6bd1ce2fec2c807afd3d802e7de2532ec44b",
+    "tools/verify_phase3.py": "f6d2349434b527faf217a7c85b397683c697f07cdcadce096d6cc51fd8f31ed2",
+    "validation.py": "fe91d91d003e22c0ce0cf3db24a0b5cd058b257f4e8d831f0297e359c1f49812"
+  },
+  "raw_conversion_min_max": [
+    0.09935877044722084,
+    0.9999317394080953
+  ],
+  "CO_mask_count": 0,
+  "physical_cases": 660,
+  "max_C_H_O_He_errors": [
+    6.834740280624801e-15,
+    6.075304442873902e-15,
+    6.088418066073818e-15,
+    0.0
+  ],
+  "min_flow_mol_s": 0.0,
+  "temperature_range_K": [
+    523.000311971564,
+    1100.5963242942253
+  ],
+  "verification_status": "PASS",
+  "finished_utc": "2026-11-01T17:24:13.916522+00:00",
+  "output_sha256": {
+    "node_comparisons.csv": "0fe2d0c6a387d7bf8b3af1f8fbdc5b9b0abfc58f1580782c98997cec3159c250"
+  }
+}

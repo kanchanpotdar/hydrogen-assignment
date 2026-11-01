@@ -32,11 +32,11 @@ Position-versus-furnace-temperature maps are not radial–axial CFD contours.
 
 ## Important current figures
 
-These Phase 3 figures use unchanged default predictions with corrected annotations.
+These Phase 4 figures use unchanged default predictions with corrected annotations.
 
 ### Published-profile reproduction and experimental outlet comparison
 
-![Figure 4 benchmark with catalyst-specific experimental marker legend](phase3_runs/2026-11-01-corrections-final/model/fixed_reference/validation_fig4_overlay.png)
+![Figure 4 benchmark with catalyst-specific experimental marker legend](phase4_runs/2026-11-01-final-workflow/fixed_reference/validation_fig4_overlay.png)
 
 Thick curves show available digitized published PBR simulations; dashed curves
 show this model. Experimental markers represent the full outlet, positioned at
@@ -44,17 +44,28 @@ the end of the displayed segment. P-R2 curves themselves are not validated here.
 
 ### Default species and temperature profiles
 
-![Species and temperature profiles](phase3_runs/2026-11-01-corrections-final/model/01_smr_results.png)
+![Species and temperature profiles](phase4_runs/2026-11-01-final-workflow/model/01_smr_results.png)
 
 ### Historical Nu-to-h sensitivity, reproduced with clear labels
 
-![Nu-to-h sensitivity with tube-based Reynolds number retained](phase3_runs/2026-11-01-corrections-final/h_length_sensitivity/h_length_comparison.png)
+![Nu-to-h sensitivity with tube-based Reynolds number retained](phase4_runs/2026-11-01-final-workflow/h_length_sensitivity/h_length_comparison.png)
 
 This two-case script changes only the Nu-to-h conversion length. For the complete
 four-configuration comparison, see [Phase 2](docs/phase2/transport_comparison_report.md).
-Original operating-window figures remain in [preserved V3 results](results/);
-their old validation wording is superseded by this README. Full regeneration
-with corrected contour annotations is reserved for Phase 4.
+Original figures remain in [preserved V3 results](results/); their old validation
+wording is superseded by this README.
+
+### Operating predictions and refined axial parametric maps
+
+![Operating-window predictions, with the fixed reference benchmark distinguished](phase4_runs/2026-11-01-final-workflow/contours/contours_operating_window.png)
+
+![HMMC axial-position versus furnace-temperature parametric maps](phase4_runs/2026-11-01-final-workflow/contours/contours_axial_HMMC.png)
+
+The maps are predictions of a one-dimensional model. Phase 4 increased only the
+axial-map source sampling from 400 to 3200 points after independent Radau checks
+detected interpolation errors. Operating-window values and reference simulation
+arrays remain exactly unchanged. All three catalyst maps and all ten final
+figures are listed in the [Phase 4 report](docs/phase4/verification_report.md).
 
 ## Installation and execution
 
@@ -83,8 +94,8 @@ available, but explicit reused destinations must be changed to fresh directories
 
 `run_all.py` uses one new parent directory with `model/`, `fixed_reference/`,
 `h_length_sensitivity/`, and `contours/` stages. It runs the HMMC-only historical
-seed study; full all-catalyst seed verification remains Phase 4. The full
-workflow is documented here but has not been executed during Phase 3.
+seed study. Phase 4 executed the entire workflow, including contours, successfully;
+the separate numerical verification tool tested seeds for all three catalysts.
 
 `hyd.py --validate` accepts only the fixed benchmark physics/settings: 853 K,
 120 mL/min, all catalysts, and `v3_reproduction`. Incompatible requests fail before
@@ -128,8 +139,10 @@ Keep this uncertainty explicit. The existing Table 4 energy-row interpretation
 is retained and should be described as a justified interpretation, not a
 confirmed author-issued correction. The equilibrium check shares Kp with kinetics.
 Axial dispersion, pressure drop, intraparticle gradients and radial fields are
-not modelled. Hydrogen seeding regularizes singular rates; comprehensive numerical
-stability and applicability verification are not claimed complete.
+not modelled. Hydrogen seeding regularizes singular rates. Phase 4 numerical
+checks pass within their tested domains except for the preserved coarse HMMC
+minimum-temperature sampling; this does not establish physical applicability
+throughout extrapolated operating conditions.
 
 ## Reference data and metric definitions
 
@@ -181,7 +194,17 @@ and manifests when invoking those directly.
 | 1 | [Reproduction report](docs/phase1/baseline_reproduction_report.md), [criteria](docs/phase1/acceptance_criteria.md), [evidence](phase1_runs/2026-11-01-v3-reproduction/). |
 | 2 | [Four-configuration comparison](docs/phase2/transport_comparison_report.md), [protocol](docs/phase2/comparison_protocol.md), [successful run](phase2_runs/2026-11-01-transport-attempt02/). |
 | 3 | [Corrections and regression](docs/phase3/corrections_report.md), [protocol](docs/phase3/verification_protocol.md), [new results](phase3_runs/2026-11-01-corrections-final/). |
+| 4 | [Verification report](docs/phase4/verification_report.md), [predeclared criteria](docs/phase4/acceptance_criteria.md), [final full workflow](phase4_runs/2026-11-01-final-workflow/). |
 
-Phase 4 full contour execution, convergence, independent-solver, energy-balance
-and all-catalyst seed verification require approval. The actual assignment PDF,
-final report and presentation remain separate submission requirements.
+Phase 4 overall status is **PARTIAL**: full execution, solver/seed convergence,
+elemental conservation, refined energy checks, contour checks and exact reference
+regression pass. The unchanged 400-point HMMC output misses its dense minimum
+by 0.408216 K; 800 points miss by 0.107844 K, while 1600 points pass the 0.1 K
+criterion. Dense Tmin is 743.092652 K at 0.039362929 mm. Use this dense result for
+precise thermal-dip statements; historical sampled minima are not converged
+extrema. Failed checks and initial attempts remain available in `phase4_runs/`.
+There are 21 passing automated tests. Numerical verification commands report
+PASS/FAIL separately from execution completion and return nonzero on failure.
+
+Phase 5 requires explicit approval. The actual assignment PDF, final academic
+report, presentation and submission package remain separate requirements.

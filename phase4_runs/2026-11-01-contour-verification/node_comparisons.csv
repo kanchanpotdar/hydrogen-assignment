@@ -1,0 +1,28 @@
+catalyst,kind,T_K,flow_ml_min_RTP,max_species_or_ratio_difference,max_T_difference_K,criterion,passed,description
+HMMC,operating,700.0,60.0,1.9943982576542396e-09,0.0,2e-05,True,stored node vs tighter independent solve
+HMMC,operating,700.0,200.0,1.2528527937316625e-08,0.0,2e-05,True,stored node vs tighter independent solve
+HMMC,operating,1100.0,60.0,1.1904937868845167e-08,0.0,2e-05,True,stored node vs tighter independent solve
+HMMC,operating,1100.0,200.0,1.1874495442487643e-08,0.0,2e-05,True,stored node vs tighter independent solve
+HMMC,operating,900.0,130.0,1.920407255440182e-08,0.0,2e-05,True,stored node vs tighter independent solve
+HMMC,operating,853.0,120.0,0.0008943179167434367,0.0,0.005,True,off-grid bilinear interpolation
+HMMC,axial,700.0,120,5.684341886080802e-14,5.684341886080802e-14,2e-05,True,stored map vs independently reconstructed V3 interpolation
+HMMC,axial,850.0,120,5.684341886080802e-14,5.684341886080802e-14,2e-05,True,stored map vs independently reconstructed V3 interpolation
+HMMC,axial,1100.0,120,1.1368683772161603e-13,1.1368683772161603e-13,2e-05,True,stored map vs independently reconstructed V3 interpolation
+57-4Q,operating,700.0,60.0,9.61111190633801e-10,0.0,2e-05,True,stored node vs tighter independent solve
+57-4Q,operating,700.0,200.0,1.1948335654210496e-09,0.0,2e-05,True,stored node vs tighter independent solve
+57-4Q,operating,1100.0,60.0,3.022343780800796e-08,0.0,2e-05,True,stored node vs tighter independent solve
+57-4Q,operating,1100.0,200.0,2.7056774043465737e-09,0.0,2e-05,True,stored node vs tighter independent solve
+57-4Q,operating,900.0,130.0,1.0221583579550497e-08,0.0,2e-05,True,stored node vs tighter independent solve
+57-4Q,operating,853.0,120.0,0.0019750590308831306,0.0,0.005,True,off-grid bilinear interpolation
+57-4Q,axial,700.0,120,5.684341886080802e-14,5.684341886080802e-14,2e-05,True,stored map vs independently reconstructed V3 interpolation
+57-4Q,axial,850.0,120,5.684341886080802e-14,5.684341886080802e-14,2e-05,True,stored map vs independently reconstructed V3 interpolation
+57-4Q,axial,1100.0,120,1.1368683772161603e-13,1.1368683772161603e-13,2e-05,True,stored map vs independently reconstructed V3 interpolation
+25-4Q,operating,700.0,60.0,6.303850219602225e-10,0.0,2e-05,True,stored node vs tighter independent solve
+25-4Q,operating,700.0,200.0,8.401592616058551e-10,0.0,2e-05,True,stored node vs tighter independent solve
+25-4Q,operating,1100.0,60.0,1.1652584008814415e-08,0.0,2e-05,True,stored node vs tighter independent solve
+25-4Q,operating,1100.0,200.0,2.994868403272122e-08,0.0,2e-05,True,stored node vs tighter independent solve
+25-4Q,operating,900.0,130.0,1.7856510159397487e-09,0.0,2e-05,True,stored node vs tighter independent solve
+25-4Q,operating,853.0,120.0,0.00020718621745019483,0.0,0.005,True,off-grid bilinear interpolation
+25-4Q,axial,700.0,120,5.684341886080802e-14,5.684341886080802e-14,2e-05,True,stored map vs independently reconstructed V3 interpolation
+25-4Q,axial,850.0,120,5.684341886080802e-14,5.684341886080802e-14,2e-05,True,stored map vs independently reconstructed V3 interpolation
+25-4Q,axial,1100.0,120,1.1368683772161603e-13,1.1368683772161603e-13,2e-05,True,stored map vs independently reconstructed V3 interpolation

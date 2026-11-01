@@ -1,0 +1,20 @@
+{
+  "finite": true,
+  "min_flow_mol_s": 0.0,
+  "min_T_K": 523.0008367711159,
+  "max_T_K": 925.0000002986325,
+  "max_normalization_error": 2.220446049250313e-16,
+  "relative_C_H_O_He_errors": [
+    1.5772477570672616e-15,
+    1.2851605552233254e-15,
+    1.752497507852513e-15,
+    0.0
+  ],
+  "min_CH4_conversion": 0.0,
+  "max_CH4_conversion": 0.9898012030433365,
+  "passed": true,
+  "kind": "operating",
+  "catalyst": "57-4Q",
+  "T_K": 925.0,
+  "flow_ml_min_RTP": 130.0
+}

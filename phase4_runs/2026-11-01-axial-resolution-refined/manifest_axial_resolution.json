@@ -1,0 +1,50 @@
+{
+  "stage": "axial_resolution",
+  "status": "COMPLETED",
+  "started_utc": "2026-11-01T17:21:40.576193+00:00",
+  "argv": [
+    "tools/check_axial_resolution.py",
+    "--workflow",
+    "phase4_runs/2026-11-01-workflow",
+    "--out",
+    "phase4_runs/2026-11-01-axial-resolution-refined"
+  ],
+  "cwd": "/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model",
+  "output_directory": "/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/phase4_runs/2026-11-01-axial-resolution-refined",
+  "python": "3.11.1 (v3.11.1:a7a450f84a, Dec  6 2022, 15:24:06) [Clang 13.0.0 (clang-1300.0.29.30)]",
+  "executable": "/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/.venv-phase1/bin/python",
+  "platform": "macOS-26.5.1-arm64-arm-64bit",
+  "dependencies": {
+    "numpy": "2.2.6",
+    "scipy": "1.15.3",
+    "matplotlib": "3.10.3"
+  },
+  "git_commit": "73c925860d23ecab4ac743a43ce3f59a0c7f6609",
+  "git_status": "?? phase4_runs/",
+  "settings": {
+    "reference": "Radau rtol1e-9, species atol1e-17, T atol1e-7"
+  },
+  "source_data_sha256": {
+    "compare_h_length.py": "4a494a69241c5e114c8be672ed2629d17d7f04685d61f987f7db7fa6cb154b26",
+    "data/fig4_digitized_curves.csv": "4560c6d773e1cf5a2f53be20605c4fbcb111bd85adae07950e5dfd5ad998aadf",
+    "data/fig4_experimental_points.csv": "51f7648d8e8b9a640281823449413e317f440797c762476d8f48cde1eaee4564",
+    "hyd.py": "95480de0d87d1a628c9e0f11558a5222bc08e4610650c610535109cc1ceefd02",
+    "hyd_contours.py": "297f65ee603fbb43e36bb2d12d66fb302171de9d213816038f23ef8461831988",
+    "numerical_checks.py": "d20c6e2a6bdd474a023bb015d7fd2ed7efc46c026979672ba9387e581f70e703",
+    "run_all.py": "8a1480290dffb527ddf7ed1bf6f18f0c0ce85f12c72d107bec4d4d1f9509190e",
+    "run_metadata.py": "6261e55b149236b206ad2d44eeb8a43a2bfad0a0c8db6683c8d716cc7fde59c3",
+    "tools/baseline_regression.py": "30e7e5c90f6673ae6a8e3e32d8008dab08f3c6e50fc52994abcc13a1c1846785",
+    "tools/check_axial_resolution.py": "47b652f2a6832570a4ed67d193758cf3527ca956e235be204703834806813c6e",
+    "tools/compare_transport.py": "45edf244daea96fe83600f4fc6c800be53cf1fe1e5bbe2209875b7c0b1c925e7",
+    "tools/reproduce_phase1.py": "6bc39006a091fb9bcee9f9dac17b2d6b934bafd82c5b82ad5bca9bcfd440485d",
+    "tools/verify_contours.py": "4ad98674bed5ae6965b8549bd9d8d62f9c831fb9690873e8168c2f23b0811d85",
+    "tools/verify_numerics.py": "3414dbe02078d2f16417d2c1aa7a4c3080c02748132e18b6b981ca6862468140",
+    "tools/verify_phase3.py": "f6d2349434b527faf217a7c85b397683c697f07cdcadce096d6cc51fd8f31ed2",
+    "validation.py": "fe91d91d003e22c0ce0cf3db24a0b5cd058b257f4e8d831f0297e359c1f49812"
+  },
+  "verification_status": "FAIL",
+  "finished_utc": "2026-11-01T17:22:15.079738+00:00",
+  "output_sha256": {
+    "axial_resolution.csv": "53c0c3d229f4a166ce31b1a412b26ececc4d1a04dede723d6bd15cc168578db7"
+  }
+}

@@ -1,0 +1,380 @@
+[
+  {
+    "catalyst": "HMMC",
+    "case": "tol_1",
+    "finite": true,
+    "min_flow_mol_s": 0.0,
+    "min_T_K": 523.0010078262367,
+    "max_T_K": 853.0000000067662,
+    "max_normalization_error": 2.220446049250313e-16,
+    "relative_C_H_O_He_errors": [
+      1.7086850701562002e-15,
+      1.2656884255987296e-15,
+      1.518831173472178e-15,
+      0.0
+    ],
+    "min_CH4_conversion": 0.0,
+    "max_CH4_conversion": 0.9541394921918449,
+    "passed": true
+  },
+  {
+    "catalyst": "HMMC",
+    "case": "tol_0.1",
+    "finite": true,
+    "min_flow_mol_s": 0.0,
+    "min_T_K": 523.0010080361894,
+    "max_T_K": 853.0,
+    "max_normalization_error": 2.220446049250313e-16,
+    "relative_C_H_O_He_errors": [
+      1.8985389668402224e-15,
+      2.0251014809579673e-15,
+      2.6579545535763113e-15,
+      0.0
+    ],
+    "min_CH4_conversion": 0.0,
+    "max_CH4_conversion": 0.9541394921810364,
+    "passed": true
+  },
+  {
+    "catalyst": "HMMC",
+    "case": "tol_0.01",
+    "finite": true,
+    "min_flow_mol_s": 0.0,
+    "min_T_K": 523.0010080310608,
+    "max_T_K": 853.0,
+    "max_normalization_error": 2.220446049250313e-16,
+    "relative_C_H_O_He_errors": [
+      2.6579545535763113e-15,
+      6.075304442873902e-15,
+      4.936201313784578e-15,
+      0.0
+    ],
+    "min_CH4_conversion": -2.220446049250313e-16,
+    "max_CH4_conversion": 0.9541394921814293,
+    "passed": true
+  },
+  {
+    "catalyst": "HMMC",
+    "case": "Radau_0.1",
+    "finite": true,
+    "min_flow_mol_s": 0.0,
+    "min_T_K": 523.0010080367234,
+    "max_T_K": 853.0000000000075,
+    "max_normalization_error": 2.220446049250313e-16,
+    "relative_C_H_O_He_errors": [
+      2.468100656892289e-15,
+      1.7719637958382215e-15,
+      2.6579545535763113e-15,
+      0.0
+    ],
+    "min_CH4_conversion": 0.0,
+    "max_CH4_conversion": 0.9541394921817329,
+    "passed": true
+  },
+  {
+    "catalyst": "HMMC",
+    "case": "seed_1e-8",
+    "finite": true,
+    "min_flow_mol_s": 0.0,
+    "min_T_K": 523.0010080417889,
+    "max_T_K": 853.000000372367,
+    "max_normalization_error": 2.220446049250313e-16,
+    "relative_C_H_O_He_errors": [
+      1.898537087288525e-15,
+      2.025106158937555e-15,
+      2.8478056309327874e-15,
+      0.0
+    ],
+    "min_CH4_conversion": 0.0,
+    "max_CH4_conversion": 0.9541401239674236,
+    "passed": true
+  },
+  {
+    "catalyst": "HMMC",
+    "case": "seed_1e-10",
+    "finite": true,
+    "min_flow_mol_s": 0.0,
+    "min_T_K": 523.001008041845,
+    "max_T_K": 853.0000000000025,
+    "max_normalization_error": 2.220446049250313e-16,
+    "relative_C_H_O_He_errors": [
+      3.037659309588813e-15,
+      1.3922605164307856e-15,
+      1.708683361643707e-15,
+      0.0
+    ],
+    "min_CH4_conversion": 0.0,
+    "max_CH4_conversion": 0.9541401302837561,
+    "passed": true
+  },
+  {
+    "catalyst": "HMMC",
+    "case": "seed_1e-12",
+    "finite": true,
+    "min_flow_mol_s": 0.0,
+    "min_T_K": 523.0010080418455,
+    "max_T_K": 853.0000000013135,
+    "max_normalization_error": 2.220446049250313e-16,
+    "relative_C_H_O_He_errors": [
+      2.088390775135558e-15,
+      2.1516753440718877e-15,
+      3.6072204297796e-15,
+      0.0
+    ],
+    "min_CH4_conversion": 2.220446049250313e-16,
+    "max_CH4_conversion": 0.9541401303496405,
+    "passed": true
+  },
+  {
+    "catalyst": "57-4Q",
+    "case": "tol_1",
+    "finite": true,
+    "min_flow_mol_s": 0.0,
+    "min_T_K": 523.0014239009746,
+    "max_T_K": 853.0000003007299,
+    "max_normalization_error": 2.220446049250313e-16,
+    "relative_C_H_O_He_errors": [
+      4.556493520416534e-15,
+      1.8985326383980945e-15,
+      2.278246760208267e-15,
+      0.0
+    ],
+    "min_CH4_conversion": -2.220446049250313e-16,
+    "max_CH4_conversion": 0.8533337439157805,
+    "passed": true
+  },
+  {
+    "catalyst": "57-4Q",
+    "case": "tol_0.1",
+    "finite": true,
+    "min_flow_mol_s": 0.0,
+    "min_T_K": 523.0014241087001,
+    "max_T_K": 853.000000029145,
+    "max_normalization_error": 2.220446049250313e-16,
+    "relative_C_H_O_He_errors": [
+      5.1260552104686e-15,
+      1.8985326383980945e-15,
+      3.2275162436283783e-15,
+      0.0
+    ],
+    "min_CH4_conversion": 0.0,
+    "max_CH4_conversion": 0.8533337435922252,
+    "passed": true
+  },
+  {
+    "catalyst": "57-4Q",
+    "case": "tol_0.01",
+    "finite": true,
+    "min_flow_mol_s": 0.0,
+    "min_T_K": 523.0014240966185,
+    "max_T_K": 853.0000000031413,
+    "max_normalization_error": 2.220446049250313e-16,
+    "relative_C_H_O_He_errors": [
+      3.797077933680445e-15,
+      1.2656884255987296e-15,
+      2.468100656892289e-15,
+      0.0
+    ],
+    "min_CH4_conversion": 0.0,
+    "max_CH4_conversion": 0.8533337434164208,
+    "passed": true
+  },
+  {
+    "catalyst": "57-4Q",
+    "case": "Radau_0.1",
+    "finite": true,
+    "min_flow_mol_s": 0.0,
+    "min_T_K": 523.0014240967023,
+    "max_T_K": 853.0000000010131,
+    "max_normalization_error": 2.220446049250313e-16,
+    "relative_C_H_O_He_errors": [
+      3.4173701403124005e-15,
+      2.5313768511974592e-15,
+      2.278246760208267e-15,
+      0.0
+    ],
+    "min_CH4_conversion": 0.0,
+    "max_CH4_conversion": 0.8533337434459616,
+    "passed": true
+  },
+  {
+    "catalyst": "57-4Q",
+    "case": "seed_1e-8",
+    "finite": true,
+    "min_flow_mol_s": 0.0,
+    "min_T_K": 523.0014241139505,
+    "max_T_K": 853.0000000291443,
+    "max_normalization_error": 2.220446049250313e-16,
+    "relative_C_H_O_He_errors": [
+      3.03765933966164e-15,
+      2.5313826986719436e-15,
+      2.8478056309327874e-15,
+      0.0
+    ],
+    "min_CH4_conversion": 0.0,
+    "max_CH4_conversion": 0.8533351509421905,
+    "passed": true
+  },
+  {
+    "catalyst": "57-4Q",
+    "case": "seed_1e-10",
+    "finite": true,
+    "min_flow_mol_s": 0.0,
+    "min_T_K": 523.0014241140029,
+    "max_T_K": 853.0000000291446,
+    "max_normalization_error": 2.220446049250313e-16,
+    "relative_C_H_O_He_errors": [
+      3.2275130164381137e-15,
+      1.771967930002818e-15,
+      3.417366723287414e-15,
+      0.0
+    ],
+    "min_CH4_conversion": 0.0,
+    "max_CH4_conversion": 0.853335165012026,
+    "passed": true
+  },
+  {
+    "catalyst": "57-4Q",
+    "case": "seed_1e-12",
+    "finite": true,
+    "min_flow_mol_s": 0.0,
+    "min_T_K": 523.001424114004,
+    "max_T_K": 853.0000000291446,
+    "max_normalization_error": 2.220446049250313e-16,
+    "relative_C_H_O_He_errors": [
+      3.417366722949095e-15,
+      1.2656913788658162e-15,
+      1.7086833614745475e-15,
+      0.0
+    ],
+    "min_CH4_conversion": 2.220446049250313e-16,
+    "max_CH4_conversion": 0.8533351651292884,
+    "passed": true
+  },
+  {
+    "catalyst": "25-4Q",
+    "case": "tol_1",
+    "finite": true,
+    "min_flow_mol_s": 0.0,
+    "min_T_K": 523.0028621247434,
+    "max_T_K": 853.0000002824227,
+    "max_normalization_error": 2.220446049250313e-16,
+    "relative_C_H_O_He_errors": [
+      3.2275162436283783e-15,
+      1.2656884255987296e-15,
+      2.278246760208267e-15,
+      0.0
+    ],
+    "min_CH4_conversion": -2.220446049250313e-16,
+    "max_CH4_conversion": 0.6781945758007946,
+    "passed": true
+  },
+  {
+    "catalyst": "25-4Q",
+    "case": "tol_0.1",
+    "finite": true,
+    "min_flow_mol_s": 0.0,
+    "min_T_K": 523.0028620790303,
+    "max_T_K": 853.0000000298243,
+    "max_normalization_error": 2.220446049250313e-16,
+    "relative_C_H_O_He_errors": [
+      4.3666396237325115e-15,
+      1.2656884255987296e-15,
+      2.278246760208267e-15,
+      0.0
+    ],
+    "min_CH4_conversion": 0.0,
+    "max_CH4_conversion": 0.6781945759981998,
+    "passed": true
+  },
+  {
+    "catalyst": "25-4Q",
+    "case": "tol_0.01",
+    "finite": true,
+    "min_flow_mol_s": 0.0,
+    "min_T_K": 523.0028620879615,
+    "max_T_K": 853.0000000029588,
+    "max_normalization_error": 2.220446049250313e-16,
+    "relative_C_H_O_He_errors": [
+      2.6579545535763113e-15,
+      4.303340647035681e-15,
+      6.834740280624801e-15,
+      0.0
+    ],
+    "min_CH4_conversion": 0.0,
+    "max_CH4_conversion": 0.6781945758862831,
+    "passed": true
+  },
+  {
+    "catalyst": "25-4Q",
+    "case": "Radau_0.1",
+    "finite": true,
+    "min_flow_mol_s": 0.0,
+    "min_T_K": 523.0028620804513,
+    "max_T_K": 853.0000000020738,
+    "max_normalization_error": 2.220446049250313e-16,
+    "relative_C_H_O_He_errors": [
+      2.6579545535763113e-15,
+      1.7719637958382215e-15,
+      2.278246760208267e-15,
+      0.0
+    ],
+    "min_CH4_conversion": 0.0,
+    "max_CH4_conversion": 0.6781945759078287,
+    "passed": true
+  },
+  {
+    "catalyst": "25-4Q",
+    "case": "seed_1e-8",
+    "finite": true,
+    "min_flow_mol_s": 0.0,
+    "min_T_K": 523.0028620827275,
+    "max_T_K": 853.0000000298243,
+    "max_normalization_error": 2.220446049250313e-16,
+    "relative_C_H_O_He_errors": [
+      2.4680982134750825e-15,
+      8.859839445351802e-16,
+      2.27824450474623e-15,
+      0.0
+    ],
+    "min_CH4_conversion": 0.0,
+    "max_CH4_conversion": 0.6781970133813436,
+    "passed": true
+  },
+  {
+    "catalyst": "25-4Q",
+    "case": "seed_1e-10",
+    "finite": true,
+    "min_flow_mol_s": 0.0,
+    "min_T_K": 523.002862082765,
+    "max_T_K": 853.0000000298243,
+    "max_normalization_error": 2.220446049250313e-16,
+    "relative_C_H_O_He_errors": [
+      2.847805602739512e-15,
+      2.4048136192895387e-15,
+      2.4680981890409103e-15,
+      0.0
+    ],
+    "min_CH4_conversion": 0.0,
+    "max_CH4_conversion": 0.6781970377370148,
+    "passed": true
+  },
+  {
+    "catalyst": "25-4Q",
+    "case": "seed_1e-12",
+    "finite": true,
+    "min_flow_mol_s": 0.0,
+    "min_T_K": 523.0028620827641,
+    "max_T_K": 853.0000000298239,
+    "max_normalization_error": 2.220446049250313e-16,
+    "relative_C_H_O_He_errors": [
+      4.556488963932127e-15,
+      2.0251062061853063e-15,
+      4.936196377593137e-15,
+      0.0
+    ],
+    "min_CH4_conversion": 2.220446049250313e-16,
+    "max_CH4_conversion": 0.678197038068681,
+    "passed": true
+  }
+]

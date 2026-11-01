@@ -1,0 +1,20 @@
+{
+  "finite": true,
+  "min_flow_mol_s": 0.0,
+  "min_T_K": 523.0007805865956,
+  "max_T_K": 1050.0000000000023,
+  "max_normalization_error": 2.220446049250313e-16,
+  "relative_C_H_O_He_errors": [
+    3.1722423243406243e-15,
+    3.4606164548015897e-15,
+    1.87450682801946e-15,
+    0.0
+  ],
+  "min_CH4_conversion": 0.0,
+  "max_CH4_conversion": 0.9997893511581754,
+  "passed": true,
+  "kind": "operating",
+  "catalyst": "HMMC",
+  "T_K": 1050.0,
+  "flow_ml_min_RTP": 158.0
+}

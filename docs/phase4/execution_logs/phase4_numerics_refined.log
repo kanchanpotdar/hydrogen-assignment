@@ -1,0 +1,25 @@
+HMMC tol_1 completed 0.46 s
+HMMC tol_0.1 completed 0.76 s
+HMMC tol_0.01 completed 0.53 s
+HMMC energy_tol_0.001 completed 0.56 s
+HMMC Radau_0.1 completed 2.17 s
+HMMC seed_1e-8 completed 0.47 s
+HMMC seed_1e-10 completed 0.47 s
+HMMC seed_1e-12 completed 0.53 s
+57-4Q tol_1 completed 0.26 s
+57-4Q tol_0.1 completed 0.3 s
+57-4Q tol_0.01 completed 0.35 s
+57-4Q energy_tol_0.001 completed 0.43 s
+57-4Q Radau_0.1 completed 1.66 s
+57-4Q seed_1e-8 completed 0.36 s
+57-4Q seed_1e-10 completed 0.37 s
+57-4Q seed_1e-12 completed 0.39 s
+25-4Q tol_1 completed 0.27 s
+25-4Q tol_0.1 completed 0.36 s
+25-4Q tol_0.01 completed 0.35 s
+25-4Q energy_tol_0.001 completed 0.45 s
+25-4Q Radau_0.1 completed 1.58 s
+25-4Q seed_1e-8 completed 0.35 s
+25-4Q seed_1e-10 completed 0.38 s
+25-4Q seed_1e-12 completed 0.41 s
+Numerical verification status: FAIL

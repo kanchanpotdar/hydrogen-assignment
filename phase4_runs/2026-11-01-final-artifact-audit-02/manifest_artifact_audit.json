@@ -1,0 +1,170 @@
+{
+  "stage": "artifact_audit",
+  "status": "COMPLETED",
+  "started_utc": "2026-11-01T17:29:33.117723+00:00",
+  "argv": [
+    "tools/audit_final_artifacts.py",
+    "--workflow",
+    "phase4_runs/2026-11-01-final-workflow",
+    "--out",
+    "phase4_runs/2026-11-01-final-artifact-audit-02"
+  ],
+  "cwd": "/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model",
+  "output_directory": "/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/phase4_runs/2026-11-01-final-artifact-audit-02",
+  "python": "3.11.1 (v3.11.1:a7a450f84a, Dec  6 2022, 15:24:06) [Clang 13.0.0 (clang-1300.0.29.30)]",
+  "executable": "/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/.venv-phase1/bin/python",
+  "platform": "macOS-26.5.1-arm64-arm-64bit",
+  "dependencies": {
+    "numpy": "2.2.6",
+    "scipy": "1.15.3",
+    "matplotlib": "3.10.3"
+  },
+  "git_commit": "587198b19435f0aa61770e6e6c7fbc80ab481206",
+  "git_status": "?? docs/phase4/dependency_check.txt\n?? docs/phase4/test_results.txt\n?? phase4_runs/",
+  "settings": {
+    "workflow": "/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/phase4_runs/2026-11-01-final-workflow"
+  },
+  "source_data_sha256": {
+    "compare_h_length.py": "4a494a69241c5e114c8be672ed2629d17d7f04685d61f987f7db7fa6cb154b26",
+    "data/fig4_digitized_curves.csv": "4560c6d773e1cf5a2f53be20605c4fbcb111bd85adae07950e5dfd5ad998aadf",
+    "data/fig4_experimental_points.csv": "51f7648d8e8b9a640281823449413e317f440797c762476d8f48cde1eaee4564",
+    "hyd.py": "95480de0d87d1a628c9e0f11558a5222bc08e4610650c610535109cc1ceefd02",
+    "hyd_contours.py": "297f65ee603fbb43e36bb2d12d66fb302171de9d213816038f23ef8461831988",
+    "numerical_checks.py": "4e498176eb8f5becb062df709f09eb58011988a4c577948d33dc20224d501553",
+    "run_all.py": "8a1480290dffb527ddf7ed1bf6f18f0c0ce85f12c72d107bec4d4d1f9509190e",
+    "run_metadata.py": "6261e55b149236b206ad2d44eeb8a43a2bfad0a0c8db6683c8d716cc7fde59c3",
+    "tools/audit_final_artifacts.py": "d9225ac8e317fac49f07504784f1b062e92e599755bae580b8d6b9385c9f7795",
+    "tools/baseline_regression.py": "30e7e5c90f6673ae6a8e3e32d8008dab08f3c6e50fc52994abcc13a1c1846785",
+    "tools/check_axial_resolution.py": "0a7b5a231c397aeed30558f3930c58e979b59b99c499e08f9e2a9111cca9c2d8",
+    "tools/compare_transport.py": "45edf244daea96fe83600f4fc6c800be53cf1fe1e5bbe2209875b7c0b1c925e7",
+    "tools/reproduce_phase1.py": "6bc39006a091fb9bcee9f9dac17b2d6b934bafd82c5b82ad5bca9bcfd440485d",
+    "tools/verify_contours.py": "4c9170c7250cc030e5fa79ac3ab1d1e0d3ce4bd299159097c5cf0e17953744c0",
+    "tools/verify_numerics.py": "ae3980d92b9b61836408f6dee833957e422ffca0185ed0602348163d077ff353",
+    "tools/verify_phase3.py": "f6d2349434b527faf217a7c85b397683c697f07cdcadce096d6cc51fd8f31ed2",
+    "validation.py": "fe91d91d003e22c0ce0cf3db24a0b5cd058b257f4e8d831f0297e359c1f49812"
+  },
+  "figures": [
+    "h_length_sensitivity/h_length_comparison.png",
+    "contours/contours_axial_57-4Q.png",
+    "contours/contours_axial_HMMC.png",
+    "contours/contours_axial_25-4Q.png",
+    "contours/contours_operating_window.png",
+    "model/02_axial_fields_25-4Q.png",
+    "model/02_axial_fields_HMMC.png",
+    "model/01_smr_results.png",
+    "model/02_axial_fields_57-4Q.png",
+    "fixed_reference/validation_fig4_overlay.png"
+  ],
+  "inventory_files": 690,
+  "CSV_regression": [
+    {
+      "file": "smr_summary.csv",
+      "byte_equal": false,
+      "rows": 12,
+      "max_absolute_difference": {
+        "CH4": 0.0,
+        "H2O": 0.0,
+        "CO": 0.0,
+        "CO2": 0.0,
+        "H2": 0.0,
+        "He": 0.0,
+        "T_K": 0.0,
+        "X_CH4": 0.0
+      },
+      "issues": [],
+      "passed": true,
+      "numeric_fields_exact": true,
+      "allowed_presentation_mapping": {
+        "signed_error": "abs_err",
+        "signed_difference": "abs_diff",
+        "mean_species_RMSE": "species_curve_RMSE"
+      }
+    },
+    {
+      "file": "validation_table.csv",
+      "byte_equal": false,
+      "rows": 15,
+      "max_absolute_difference": {
+        "experiment": 0.0,
+        "model": 0.0,
+        "abs_err": 0.0,
+        "rel_err_pct": 0.0,
+        "digitization_uncertainty": 0.0
+      },
+      "issues": [],
+      "passed": true,
+      "numeric_fields_exact": true,
+      "allowed_presentation_mapping": {
+        "signed_error": "abs_err",
+        "signed_difference": "abs_diff",
+        "mean_species_RMSE": "species_curve_RMSE"
+      }
+    },
+    {
+      "file": "validation_equilibrium.csv",
+      "byte_equal": false,
+      "rows": 6,
+      "max_absolute_difference": {
+        "HMMC_PBR_exit": 0.0,
+        "equilibrium": 0.0,
+        "abs_diff": 0.0
+      },
+      "issues": [],
+      "passed": true,
+      "numeric_fields_exact": true,
+      "allowed_presentation_mapping": {
+        "signed_error": "abs_err",
+        "signed_difference": "abs_diff",
+        "mean_species_RMSE": "species_curve_RMSE"
+      }
+    },
+    {
+      "file": "h_length_comparison.csv",
+      "byte_equal": false,
+      "rows": 6,
+      "max_absolute_difference": {
+        "U_inlet_W_m2K": 0.0,
+        "T_dip_K": 0.0,
+        "n_species_curves": 0.0,
+        "species_curve_RMSE": 0.0,
+        "T_curve_RMSE_K": 0.0,
+        "n_T_points": 0.0,
+        "outlet_MAE_vs_experiment": 0.0,
+        "T_dip_paper_text_K": 0.0
+      },
+      "issues": [],
+      "passed": true,
+      "numeric_fields_exact": true,
+      "allowed_presentation_mapping": {
+        "signed_error": "abs_err",
+        "signed_difference": "abs_diff",
+        "mean_species_RMSE": "species_curve_RMSE"
+      }
+    }
+  ],
+  "profile_array_equal": {
+    "HMMC": true,
+    "57-4Q": true,
+    "25-4Q": true
+  },
+  "operating_grid_unchanged": true,
+  "axial_map_before_after": {
+    "HMMC": {
+      "max_species_change": 0.0006924818595463456,
+      "max_T_change_K": 0.6195080819265968
+    },
+    "57-4Q": {
+      "max_species_change": 0.0004532862298189805,
+      "max_T_change_K": 1.474677402917223
+    },
+    "25-4Q": {
+      "max_species_change": 0.0003818331277942351,
+      "max_T_change_K": 1.2403260346261504
+    }
+  },
+  "verification_status": "PASS",
+  "finished_utc": "2026-11-01T17:29:34.120484+00:00",
+  "output_sha256": {
+    "file_inventory.json": "35308bf8dc16058ef951cb9c271963ecdd91a4f7b03f6233134d8b846943d927"
+  }
+}
