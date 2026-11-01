@@ -1,0 +1,150 @@
+{
+  "status": "FAIL",
+  "started_utc": "2026-11-01T16:40:29Z",
+  "command": [
+    "tools/compare_transport.py",
+    "--out",
+    "phase2_runs/2026-11-01-transport"
+  ],
+  "python": "3.11.1 (v3.11.1:a7a450f84a, Dec  6 2022, 15:24:06) [Clang 13.0.0 (clang-1300.0.29.30)]",
+  "platform": "macOS-26.5.1-arm64-arm-64bit",
+  "commit": "ab30658b266774080a20b2c08c3207230416a145",
+  "cwd": "/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model",
+  "source_hashes": {
+    "hyd.py": "2f8f75e3caf7575822f296f174f50f79b6bc14d32b06f92da06a36738a6fc09f",
+    "validation.py": "a479bf66c907f933dec20ef1c85af5a1cbeebb2850803e471c12290d7a7e29a3",
+    "compare_h_length.py": "2926e25c878c0d85d86ef337b306bc89abd009b9643540b51b61704b905769ff",
+    "tools/compare_transport.py": "741d6f859957743853dfcc9f927a8fd12691cee5bc0882c1a5a4afdb2c9dfd5a",
+    "data/fig4_digitized_curves.csv": "4560c6d773e1cf5a2f53be20605c4fbcb111bd85adae07950e5dfd5ad998aadf",
+    "data/fig4_experimental_points.csv": "51f7648d8e8b9a640281823449413e317f440797c762476d8f48cde1eaee4564"
+  },
+  "dependencies": {
+    "numpy": "2.2.6",
+    "scipy": "1.15.3",
+    "matplotlib": "3.10.3"
+  },
+  "settings": {
+    "T_K": 853,
+    "flow_ml_min_RTP": 120,
+    "pressure_bar": 1.01325,
+    "seed": 1e-06,
+    "solver": "LSODA",
+    "rtol": 1e-08,
+    "atol_species": 1e-16,
+    "atol_T": 1e-06
+  },
+  "configurations": {
+    "v3_reproduction": {
+      "d": 0.006,
+      "s": 0.001,
+      "L_pbr": 0.012,
+      "L_pr1": 0.05,
+      "L_pr2": 0.04,
+      "m_cat": 8.82e-05,
+      "kw_glass": 1.6,
+      "kw_steel": 16.3,
+      "T_pr2_wall": 523.0,
+      "h_length": "tube",
+      "dp": 0.0002,
+      "U_scale": 1.0,
+      "transport_config": "v3_reproduction"
+    },
+    "v3_h_particle_only": {
+      "d": 0.006,
+      "s": 0.001,
+      "L_pbr": 0.012,
+      "L_pr1": 0.05,
+      "L_pr2": 0.04,
+      "m_cat": 8.82e-05,
+      "kw_glass": 1.6,
+      "kw_steel": 16.3,
+      "T_pr2_wall": 523.0,
+      "h_length": "tube",
+      "dp": 0.0002,
+      "U_scale": 1.0,
+      "transport_config": "v3_h_particle_only"
+    },
+    "particle_lengths_gas_pr": {
+      "d": 0.006,
+      "s": 0.001,
+      "L_pbr": 0.012,
+      "L_pr1": 0.05,
+      "L_pr2": 0.04,
+      "m_cat": 8.82e-05,
+      "kw_glass": 1.6,
+      "kw_steel": 16.3,
+      "T_pr2_wall": 523.0,
+      "h_length": "tube",
+      "dp": 0.0002,
+      "U_scale": 1.0,
+      "transport_config": "particle_lengths_gas_pr"
+    },
+    "printed_equations": {
+      "d": 0.006,
+      "s": 0.001,
+      "L_pbr": 0.012,
+      "L_pr1": 0.05,
+      "L_pr2": 0.04,
+      "m_cat": 8.82e-05,
+      "kw_glass": 1.6,
+      "kw_steel": 16.3,
+      "T_pr2_wall": 523.0,
+      "h_length": "tube",
+      "dp": 0.0002,
+      "U_scale": 1.0,
+      "transport_config": "printed_equations"
+    }
+  },
+  "comparison_protocol_sha256": "4a7c205e1cab6313d1d02394769a7e9b82b1a011ec6d44a490d7bf06880f68a1",
+  "commands": [
+    {
+      "argv": [
+        "/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/.venv-phase1/bin/python",
+        "/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/hyd.py",
+        "--out",
+        "/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/phase2_runs/2026-11-01-transport/legacy_regression"
+      ],
+      "returncode": 0,
+      "seconds": 17.691166124946903
+    },
+    {
+      "argv": [
+        "/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/.venv-phase1/bin/python",
+        "/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/validation.py",
+        "--out",
+        "/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/phase2_runs/2026-11-01-transport/legacy_regression"
+      ],
+      "returncode": 0,
+      "seconds": 1.7976709160138853
+    },
+    {
+      "argv": [
+        "/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/.venv-phase1/bin/python",
+        "/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/compare_h_length.py",
+        "--out",
+        "/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/phase2_runs/2026-11-01-transport/legacy_regression"
+      ],
+      "returncode": 0,
+      "seconds": 2.7786293330136687
+    }
+  ],
+  "failure": "TypeError(\"dict() got multiple values for keyword argument 'configuration'\")",
+  "finished_utc": "2026-11-01T16:40:52Z",
+  "output_hashes": {
+    "legacy_csv_regression.json": "ee13ce8bd52d0f6d82a69825258c9dfb5520f22fd7bef48dbc634512496732a0",
+    "legacy_regression/compare_h_length.py.log": "db8a6a0614d12185db40ba695ebd8e108d41a0f8eb22ba3b71d9e024cfa7d4cb",
+    "legacy_regression/02_axial_fields_25-4Q.png": "43d9792b781f8b25f5d80044404a6d44281558d79caaca371a0c7567df142807",
+    "legacy_regression/validation_table.md": "dbd282e3a023ef32456cbca286b1fb4f0d73ffcbd3addefcde964cb8a3020ec7",
+    "legacy_regression/h_length_comparison.csv": "4a36544c279979d510091940c3fe8e7531828051306c7d58faf7edd1b0a51aa7",
+    "legacy_regression/hyd.py.log": "0edce1c7993beda329bb3e4ea2ad6259588a1266a5a2fea9fd4c08a5d731e3ee",
+    "legacy_regression/validation.py.log": "0de0d559a49bdcece51bfc9c783ee12014abcd8aa4ff26d7ae63e9555a9ea3d4",
+    "legacy_regression/validation_table.csv": "c163b8d695fe9f7129b03c4162577199ff9ebb209df515c7bc67aedcaa2c0055",
+    "legacy_regression/02_axial_fields_HMMC.png": "03de3436be7c6363cc02e3eec56d14c68dd981b228e60002cc392fceeb60669f",
+    "legacy_regression/validation_equilibrium.csv": "cd2514daafd37701a79655c0485857be5130b6b1fb98ae6027657a203f2251a1",
+    "legacy_regression/h_length_comparison.png": "9dcaf4f1f5f276a63fbae91a29fa79dd2d5eda802a5023e68c0425beb3ec5777",
+    "legacy_regression/01_smr_results.png": "378197ccf63695dd8aa6377dbea40f3b598aab280d696b711eafb12ac339b7ac",
+    "legacy_regression/smr_summary.csv": "44c7a91ea43205dd8e7a2785e2485f40b0ea73b4d66c6be0434055d9c371d2eb",
+    "legacy_regression/validation_fig4_overlay.png": "2a5ff35826f4edada47a779b5763a3aab4afabbbe14c885bab700b4e096ad187",
+    "legacy_regression/02_axial_fields_57-4Q.png": "2cace865f5541881a00991ced94ea90bf53fde121e847259fc4d444c336ca17e"
+  }
+}

@@ -82,6 +82,18 @@ class TransportTests(unittest.TestCase):
         self.assertEqual(p.returncode,0)
         for name in CHOICES:self.assertIn(name,p.stdout)
 
+    def test_successful_named_and_legacy_cli(self):
+        for args,reactor,name in [(['--transport-config','printed_equations'],h.Reactor(transport_config='printed_equations'),'printed_equations'),
+                                  (['--h-length','particle'],h.Reactor(h_length='particle'),'v3_h_particle_only')]:
+            with tempfile.TemporaryDirectory() as td:
+                cmd=[sys.executable,str(ROOT/'hyd.py'),'--catalyst','25-4Q','--out',td,*args]
+                p=subprocess.run(cmd,cwd=ROOT,capture_output=True,text=True)
+                self.assertEqual(p.returncode,0,p.stderr)
+                self.assertIn(name,p.stdout)
+                expected=Path(td)/'expected.csv'
+                h.write_summary({'25-4Q':h.run('25-4Q',reactor=reactor)},expected)
+                self.assertEqual(expected.read_bytes(),(Path(td)/'smr_summary.csv').read_bytes())
+
     def test_default_profiles_and_csv_match_baseline(self):
         prior=ROOT/'phase1_runs/2026-11-01-v3-reproduction'
         results={}

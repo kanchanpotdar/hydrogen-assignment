@@ -1,0 +1,24 @@
+Matplotlib is building the font cache; this may take a moment.
+Feed: CH4 5%, H2O 20%, He 75% | furnace 853 K | 120 mL/min (RTP) | PBR transport: v3_reproduction | H2 seed 1e-6 (numerical only)
+
+HMMC
+  PBR exit       CH4=0.0021 H2O=0.1101 CO=0.0146 CO2=0.0290 H2=0.1596 He=0.6847 T=853.0 K
+  P-R1 exit      CH4=0.0021 H2O=0.1101 CO=0.0146 CO2=0.0290 H2=0.1596 He=0.6847 T=853.0 K
+  P-R2 @3 mm     CH4=0.0021 H2O=0.1077 CO=0.0122 CO2=0.0314 H2=0.1620 He=0.6847 T=536.4 K
+  X_CH4=0.954  max|atom err|=1.3e-15  Tmin(PBR)=743.5 K
+
+57-4Q
+  PBR exit       CH4=0.0068 H2O=0.1182 CO=0.0125 CO2=0.0268 H2=0.1447 He=0.6910 T=851.4 K
+  P-R1 exit      CH4=0.0068 H2O=0.1182 CO=0.0125 CO2=0.0268 H2=0.1447 He=0.6910 T=853.0 K
+  P-R2 @3 mm     CH4=0.0068 H2O=0.1155 CO=0.0098 CO2=0.0295 H2=0.1474 He=0.6910 T=536.5 K
+  X_CH4=0.853  max|atom err|=4.2e-15  Tmin(PBR)=831.4 K
+
+25-4Q
+  PBR exit       CH4=0.0151 H2O=0.1320 CO=0.0082 CO2=0.0236 H2=0.1188 He=0.7024 T=850.9 K
+  P-R1 exit      CH4=0.0151 H2O=0.1320 CO=0.0082 CO2=0.0236 H2=0.1188 He=0.7024 T=853.0 K
+  P-R2 @3 mm     CH4=0.0151 H2O=0.1296 CO=0.0058 CO2=0.0260 H2=0.1212 He=0.7024 T=536.7 K
+  X_CH4=0.678  max|atom err|=5.7e-16  Tmin(PBR)=837.6 K
+
+Note: quantitative validation vs the paper is done by validation.py (or run this script with --validate).
+
+Figures/CSV written to /Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/phase2_runs/2026-11-01-transport-attempt02/legacy_regression

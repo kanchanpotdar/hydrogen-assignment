@@ -48,6 +48,22 @@ Versioned evidence is in [the Phase 1 run](phase1_runs/2026-11-01-v3-reproductio
 This verifies the defined baseline scope, not the complete contour workflow or
 physical correctness of alternative transport interpretations.
 
+## Phase 2 transport sensitivity
+
+The default remains V3. Four explicit PBR transport interpretations are available
+through `--transport-config`; existing `--h-length tube|particle` calls retain
+their original behavior. See the [Phase 2 scientific comparison](docs/phase2/transport_comparison_report.md)
+and [comparison protocol](docs/phase2/comparison_protocol.md) for equations,
+common metric domains, results, tests, and unresolved physical interpretations.
+New evidence is in [the successful Phase 2 run](phase2_runs/2026-11-01-transport-attempt02/).
+The failed first reporting attempt is retained separately for traceability.
+
+![Transport sensitivity for HMMC at the Figure 4 conditions](phase2_runs/2026-11-01-transport-attempt02/comparison_HMMC.png)
+
+The alternatives change axial thermal behavior substantially even when the HMMC
+outlet reaches the same equilibrium. Better fit to one metric does not establish
+physical correctness; no default or kinetic parameters were retuned.
+
 ## Folder contents (keep together)
 
 | File | Purpose |

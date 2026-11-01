@@ -1,0 +1,12 @@
+test_cli_choices_and_conflicts (test_transport.TransportTests.test_cli_choices_and_conflicts) ... ok
+test_default_profiles_and_csv_match_baseline (test_transport.TransportTests.test_default_profiles_and_csv_match_baseline) ... ok
+test_dimensional_scaling_and_wall_resistance (test_transport.TransportTests.test_dimensional_scaling_and_wall_resistance) ... ok
+test_equations_and_effective_parameters (test_transport.TransportTests.test_equations_and_effective_parameters) ... ok
+test_legacy_aliases_and_explicit_precedence (test_transport.TransportTests.test_legacy_aliases_and_explicit_precedence) ... ok
+test_scientific_core_unchanged (test_transport.TransportTests.test_scientific_core_unchanged) ... ok
+test_successful_named_and_legacy_cli (test_transport.TransportTests.test_successful_named_and_legacy_cli) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 21.180s
+
+OK

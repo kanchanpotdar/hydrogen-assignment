@@ -1,0 +1,20 @@
+{
+  "Re": "dimensionless",
+  "Pr": "dimensionless",
+  "Nu": "dimensionless",
+  "h": "W/m2/K",
+  "U_W_m2K": "W/m2/K",
+  "kr": "W/m/K",
+  "kf": "W/m/K",
+  "ks": "W/m/K",
+  "cp": "J/kg/K",
+  "rho": "kg/m3",
+  "us": "m/s",
+  "mu": "Pa s",
+  "Re_length_m": "m",
+  "Nu_length_m": "m",
+  "species_domain": "identical supplied PBR digitized points z>0.05 mm",
+  "temperature_domain": "identical supplied PBR points z>0.15 mm; inlet metric also z<5 mm",
+  "experiment": "five species, full 40 mm P-R2 outlet",
+  "table5": "773/1173 K; correlated case GHSV 2.4e4/h inferred RTP flow; tabulated case uses listed properties directly"
+}

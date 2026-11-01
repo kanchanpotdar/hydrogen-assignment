@@ -1,0 +1,62 @@
+[
+  {
+    "file": "smr_summary.csv",
+    "byte_equal": true,
+    "rows": 12,
+    "max_absolute_difference": {
+      "CH4": 0.0,
+      "H2O": 0.0,
+      "CO": 0.0,
+      "CO2": 0.0,
+      "H2": 0.0,
+      "He": 0.0,
+      "T_K": 0.0,
+      "X_CH4": 0.0
+    },
+    "issues": [],
+    "passed": true
+  },
+  {
+    "file": "validation_table.csv",
+    "byte_equal": true,
+    "rows": 15,
+    "max_absolute_difference": {
+      "experiment": 0.0,
+      "model": 0.0,
+      "abs_err": 0.0,
+      "rel_err_pct": 0.0,
+      "digitization_uncertainty": 0.0
+    },
+    "issues": [],
+    "passed": true
+  },
+  {
+    "file": "validation_equilibrium.csv",
+    "byte_equal": true,
+    "rows": 6,
+    "max_absolute_difference": {
+      "HMMC_PBR_exit": 0.0,
+      "equilibrium": 0.0,
+      "abs_diff": 0.0
+    },
+    "issues": [],
+    "passed": true
+  },
+  {
+    "file": "h_length_comparison.csv",
+    "byte_equal": true,
+    "rows": 6,
+    "max_absolute_difference": {
+      "U_inlet_W_m2K": 0.0,
+      "T_dip_K": 0.0,
+      "n_species_curves": 0.0,
+      "species_curve_RMSE": 0.0,
+      "T_curve_RMSE_K": 0.0,
+      "n_T_points": 0.0,
+      "outlet_MAE_vs_experiment": 0.0,
+      "T_dip_paper_text_K": 0.0
+    },
+    "issues": [],
+    "passed": true
+  }
+]

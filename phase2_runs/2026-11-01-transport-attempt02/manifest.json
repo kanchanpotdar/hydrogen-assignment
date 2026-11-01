@@ -1,0 +1,171 @@
+{
+  "status": "PASS",
+  "started_utc": "2026-11-01T16:41:12Z",
+  "command": [
+    "tools/compare_transport.py",
+    "--out",
+    "phase2_runs/2026-11-01-transport-attempt02"
+  ],
+  "python": "3.11.1 (v3.11.1:a7a450f84a, Dec  6 2022, 15:24:06) [Clang 13.0.0 (clang-1300.0.29.30)]",
+  "platform": "macOS-26.5.1-arm64-arm-64bit",
+  "commit": "86156bec3cd68b3acb0e1e8b2f432305429410a8",
+  "cwd": "/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model",
+  "source_hashes": {
+    "hyd.py": "2f8f75e3caf7575822f296f174f50f79b6bc14d32b06f92da06a36738a6fc09f",
+    "validation.py": "a479bf66c907f933dec20ef1c85af5a1cbeebb2850803e471c12290d7a7e29a3",
+    "compare_h_length.py": "2926e25c878c0d85d86ef337b306bc89abd009b9643540b51b61704b905769ff",
+    "tools/compare_transport.py": "609b41d1aa6b2a999fd25e34bc9db44ac0a90317a65ad5f04e04eab3d7e59421",
+    "data/fig4_digitized_curves.csv": "4560c6d773e1cf5a2f53be20605c4fbcb111bd85adae07950e5dfd5ad998aadf",
+    "data/fig4_experimental_points.csv": "51f7648d8e8b9a640281823449413e317f440797c762476d8f48cde1eaee4564"
+  },
+  "dependencies": {
+    "numpy": "2.2.6",
+    "scipy": "1.15.3",
+    "matplotlib": "3.10.3"
+  },
+  "settings": {
+    "T_K": 853,
+    "flow_ml_min_RTP": 120,
+    "pressure_bar": 1.01325,
+    "seed": 1e-06,
+    "solver": "LSODA",
+    "rtol": 1e-08,
+    "atol_species": 1e-16,
+    "atol_T": 1e-06
+  },
+  "configurations": {
+    "v3_reproduction": {
+      "d": 0.006,
+      "s": 0.001,
+      "L_pbr": 0.012,
+      "L_pr1": 0.05,
+      "L_pr2": 0.04,
+      "m_cat": 8.82e-05,
+      "kw_glass": 1.6,
+      "kw_steel": 16.3,
+      "T_pr2_wall": 523.0,
+      "h_length": "tube",
+      "dp": 0.0002,
+      "U_scale": 1.0,
+      "transport_config": "v3_reproduction"
+    },
+    "v3_h_particle_only": {
+      "d": 0.006,
+      "s": 0.001,
+      "L_pbr": 0.012,
+      "L_pr1": 0.05,
+      "L_pr2": 0.04,
+      "m_cat": 8.82e-05,
+      "kw_glass": 1.6,
+      "kw_steel": 16.3,
+      "T_pr2_wall": 523.0,
+      "h_length": "tube",
+      "dp": 0.0002,
+      "U_scale": 1.0,
+      "transport_config": "v3_h_particle_only"
+    },
+    "particle_lengths_gas_pr": {
+      "d": 0.006,
+      "s": 0.001,
+      "L_pbr": 0.012,
+      "L_pr1": 0.05,
+      "L_pr2": 0.04,
+      "m_cat": 8.82e-05,
+      "kw_glass": 1.6,
+      "kw_steel": 16.3,
+      "T_pr2_wall": 523.0,
+      "h_length": "tube",
+      "dp": 0.0002,
+      "U_scale": 1.0,
+      "transport_config": "particle_lengths_gas_pr"
+    },
+    "printed_equations": {
+      "d": 0.006,
+      "s": 0.001,
+      "L_pbr": 0.012,
+      "L_pr1": 0.05,
+      "L_pr2": 0.04,
+      "m_cat": 8.82e-05,
+      "kw_glass": 1.6,
+      "kw_steel": 16.3,
+      "T_pr2_wall": 523.0,
+      "h_length": "tube",
+      "dp": 0.0002,
+      "U_scale": 1.0,
+      "transport_config": "printed_equations"
+    }
+  },
+  "comparison_protocol_sha256": "4a7c205e1cab6313d1d02394769a7e9b82b1a011ec6d44a490d7bf06880f68a1",
+  "commands": [
+    {
+      "argv": [
+        "/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/.venv-phase1/bin/python",
+        "/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/hyd.py",
+        "--out",
+        "/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/phase2_runs/2026-11-01-transport-attempt02/legacy_regression"
+      ],
+      "returncode": 0,
+      "seconds": 18.48167225002544
+    },
+    {
+      "argv": [
+        "/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/.venv-phase1/bin/python",
+        "/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/validation.py",
+        "--out",
+        "/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/phase2_runs/2026-11-01-transport-attempt02/legacy_regression"
+      ],
+      "returncode": 0,
+      "seconds": 1.8493386250338517
+    },
+    {
+      "argv": [
+        "/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/.venv-phase1/bin/python",
+        "/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/compare_h_length.py",
+        "--out",
+        "/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/phase2_runs/2026-11-01-transport-attempt02/legacy_regression"
+      ],
+      "returncode": 0,
+      "seconds": 2.9285707919625565
+    }
+  ],
+  "finished_utc": "2026-11-01T16:41:41Z",
+  "output_hashes": {
+    "figure4_metrics.csv": "012dc3ff3aca47ef0fe1f80cdd9a0234786f4fbc590a0fa7b1a5d23c144f4ac2",
+    "sanity_checks.csv": "106d0dbdc0d39c5553321bb1144d4889dbb5e852abf66ed0d888ea72b511cdf5",
+    "profiles_particle_lengths_gas_pr_57-4Q.npz": "a97b807a5c9a1bd29edd771536732422b9eb2c25c5f50b417db794dc93e60a0d",
+    "table5_comparison_SI.csv": "6f0b31d34bc66c72dedf25c68d9fe3adc2805508b68c281f077052cc8b1b07b7",
+    "profiles_v3_reproduction_57-4Q.npz": "5b4adfa4bea93fcb7fb51bd9d59bd8ecab56aec85850282be95e51026cc1b921",
+    "per_curve_metrics.csv": "d40ef648a56161632a8728f9e40077a40f29296c7585f84f1af83977ec332b35",
+    "profiles_printed_equations_25-4Q.npz": "b88248d48b22ac1439cb4105ba5c0562bf2e59336961e1d86ef128dd19cfc338",
+    "units_and_domains.json": "bec8a5eba63e0c049867c98714b6b3ef8c8aa6b07cdaa167f4701765a0c9bba7",
+    "profiles_particle_lengths_gas_pr_HMMC.npz": "585c1e7be9864cb8a1bf4960d8a2b91ac877fcb23853a4d3890038724677b5b0",
+    "legacy_csv_regression.json": "ee13ce8bd52d0f6d82a69825258c9dfb5520f22fd7bef48dbc634512496732a0",
+    "profiles_v3_h_particle_only_HMMC.npz": "a970c7c8f48bc8f2217635a9ecd2a446fa716f60012ac5aa9e9be73bc9c4823f",
+    "profiles_v3_h_particle_only_57-4Q.npz": "404376cc18bc7563d39afeba871f7be370fcc3dcc8f30c4fe36c20acb160feb6",
+    "comparison_57-4Q.png": "e6cef229bc67f17ed33fa0849c8d94c8f275b6bf10a7aa1895cdebce6e7e5e18",
+    "profiles_v3_reproduction_25-4Q.npz": "55ccc20af6dec78a591e1d9240947f0069977fe2817af7ac73b60be80c435923",
+    "profiles_printed_equations_57-4Q.npz": "5a3101c95b07f87e64c869af38a7181b295955de3a7bb95fe119bd26580c9350",
+    "figure4_inlet_transport_SI.csv": "19a8969da1b43306ab4d6f5e6a8c583080c13e9ec3e0ace1effba7e12112b9c2",
+    "comparison_HMMC.png": "02cecd7d02958de2c2d7deb92ecdbd0987d341d1075246047df0e6afb85f3e76",
+    "profiles_particle_lengths_gas_pr_25-4Q.npz": "fad01b207f023192bef938162c5aa8352b5188b30e92ae3664eb55dce3b7c364",
+    "profiles_v3_h_particle_only_25-4Q.npz": "77ba2ddd10a58ea61352534c3c70b1737052b27acf151144e015f8a6dbf55912",
+    "profiles_printed_equations_HMMC.npz": "cf3f7585bef0b857e17577e47bb103661ca772518708ea57bf65266330c62fca",
+    "comparison_25-4Q.png": "cd6f945745d286655ef1b44e66d9987f8c4a3e3e52ef1475f5a6b65c78d1499c",
+    "profiles_v3_reproduction_HMMC.npz": "759a54d3d748db7a335cfb8aa543956ed157e2217f2e5d1ebfa8ee789563302d",
+    "table5_published_SI.json": "7209732e514f9f0544d94f3fc2ed1bb9333c576182ae7a0eaa3e76181a19b824",
+    "legacy_regression/compare_h_length.py.log": "db8a6a0614d12185db40ba695ebd8e108d41a0f8eb22ba3b71d9e024cfa7d4cb",
+    "legacy_regression/02_axial_fields_25-4Q.png": "43d9792b781f8b25f5d80044404a6d44281558d79caaca371a0c7567df142807",
+    "legacy_regression/validation_table.md": "dbd282e3a023ef32456cbca286b1fb4f0d73ffcbd3addefcde964cb8a3020ec7",
+    "legacy_regression/h_length_comparison.csv": "4a36544c279979d510091940c3fe8e7531828051306c7d58faf7edd1b0a51aa7",
+    "legacy_regression/hyd.py.log": "de4f92b54b9b9f50e4af149ed8a9d81ef04bba73a558a724f78ce11fadb1f268",
+    "legacy_regression/validation.py.log": "4d2eddccc5a6cb5af3853b62e64b04434b2f6f06e2dcee1847aff8f8a7f0a5d0",
+    "legacy_regression/validation_table.csv": "c163b8d695fe9f7129b03c4162577199ff9ebb209df515c7bc67aedcaa2c0055",
+    "legacy_regression/02_axial_fields_HMMC.png": "03de3436be7c6363cc02e3eec56d14c68dd981b228e60002cc392fceeb60669f",
+    "legacy_regression/validation_equilibrium.csv": "cd2514daafd37701a79655c0485857be5130b6b1fb98ae6027657a203f2251a1",
+    "legacy_regression/h_length_comparison.png": "9dcaf4f1f5f276a63fbae91a29fa79dd2d5eda802a5023e68c0425beb3ec5777",
+    "legacy_regression/01_smr_results.png": "378197ccf63695dd8aa6377dbea40f3b598aab280d696b711eafb12ac339b7ac",
+    "legacy_regression/smr_summary.csv": "44c7a91ea43205dd8e7a2785e2485f40b0ea73b4d66c6be0434055d9c371d2eb",
+    "legacy_regression/validation_fig4_overlay.png": "2a5ff35826f4edada47a779b5763a3aab4afabbbe14c885bab700b4e096ad187",
+    "legacy_regression/02_axial_fields_57-4Q.png": "2cace865f5541881a00991ced94ea90bf53fde121e847259fc4d444c336ca17e"
+  }
+}
