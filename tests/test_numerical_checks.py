@@ -18,4 +18,13 @@ class RawStateTests(unittest.TestCase):
             r=self.fixture();r['PR2'][1][row,-1]*=1.01
             self.assertFalse(state_checks(r)['passed'])
 
+class VerificationVerdictTests(unittest.TestCase):
+    def test_failed_sampling_check_stays_failed(self):
+        from tools.verify_numerics import verification_passed
+        yes=[{'passed':True}];no=[{'passed':False}]
+        self.assertFalse(verification_passed(no,yes,yes,[]))
+        self.assertFalse(verification_passed(yes,yes,yes,[{'error':'solver failed'}]))
+        self.assertFalse(verification_passed([],yes,yes,[]))
+        self.assertTrue(verification_passed(yes,yes,yes,[]))
+
 if __name__=='__main__':unittest.main()

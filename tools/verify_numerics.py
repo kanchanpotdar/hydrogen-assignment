@@ -91,6 +91,11 @@ def energy_terms(cat,solutions,n):
     return records
 
 
+def verification_passed(comparisons, energy, sanity, failures):
+    return bool(comparisons and energy and sanity and not failures and
+                all(x['passed'] for x in comparisons+energy+sanity))
+
+
 def main(out):
     out=prepare_output(out,'numerical_verification')
     with record_run(out,'numerical_verification',dict(configuration='v3_reproduction',protocol='docs/phase4/acceptance_criteria.md')) as manifest:
@@ -155,9 +160,10 @@ def main(out):
             write_csv(out/'comparison_results.csv',comparisons);write_csv(out/'minimum_temperatures.csv',minima)
             write_csv(out/'energy_balance.csv',energy)
             (out/'state_checks.json').write_text(json.dumps(sanity,indent=2)+'\n');(out/'failures.json').write_text(json.dumps(failures,indent=2)+'\n')
-        manifest['verification_status']='PASS' if not failures and all(x['passed'] for x in comparisons+energy+sanity) else 'FAIL'
+        manifest['verification_status']='PASS' if verification_passed(comparisons,energy,sanity,failures) else 'FAIL'
         print('Numerical verification status:',manifest['verification_status'],flush=True)
+    return 0 if manifest['verification_status']=='PASS' else 1
 
 
 if __name__=='__main__':
-    ap=argparse.ArgumentParser();ap.add_argument('--out',required=True);main(ap.parse_args().out)
+    ap=argparse.ArgumentParser();ap.add_argument('--out',required=True);raise SystemExit(main(ap.parse_args().out))
