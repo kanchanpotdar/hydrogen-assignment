@@ -85,7 +85,7 @@ def main():
                 row=dict(configuration=config,catalyst=cat,mean_species_RMSE=float(np.mean([rms[s] for s in v.SPECIES])),temperature_RMSE_K=rms['T'],temperature_RMSE_inlet_K=tr,experimental_MAE=float(abs(e).mean()),experimental_RMSE=float(np.sqrt(np.mean(e**2))),experimental_MAPE_pct=mape,X_CH4=summary['X_CH4'],PBR_Tmin_K=float(res['PBR'][1][6].min()),PBR_exit_H2=float(h.mole_fractions(res['PBR'][1])[4,-1]),outlet_CH4=outlet['CH4'],outlet_H2=outlet['H2'])
                 rows.append(row)
                 U,props=h.U_pbr(res['F0'],853,reactor)
-                transport.append(dict(configuration=config,catalyst=cat,T_K=853.,**props))
+                transport.append(dict(catalyst=cat,T_K=853.,**props))
                 states=np.hstack([res[s][1] for s in ['PBR','PR1','PR2']]);initial=atoms@res['F0']
                 errs=np.max(np.abs((atoms@states[:6]-initial[:,None])/initial[:,None]),axis=1)
                 norm=float(abs(h.mole_fractions(states).sum(axis=0)-1).max());minimum=float(states[:6].min())

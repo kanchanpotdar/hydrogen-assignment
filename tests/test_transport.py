@@ -1,5 +1,6 @@
 """Equation, dimensional-scaling, legacy interface and full-profile regression checks."""
 import dataclasses
+import ast
 import subprocess
 import sys
 import tempfile
@@ -58,6 +59,19 @@ class TransportTests(unittest.TestCase):
         self.assertEqual(h.effective_transport(h.Reactor(h_length='particle',transport_config='v3_reproduction'))['configuration'],'v3_reproduction')
         for r in [h.Reactor(h_length='bad'),h.Reactor(transport_config='bad')]:
             with self.assertRaises(ValueError):h.effective_transport(r)
+
+    def test_scientific_core_unchanged(self):
+        old=ast.parse(subprocess.check_output(['git','show','v3-baseline:hyd.py'],cwd=ROOT).decode())
+        new=ast.parse((ROOT/'hyd.py').read_text())
+        functions=lambda tree:{n.name:ast.dump(n,include_attributes=False) for n in tree.body if isinstance(n,ast.FunctionDef)}
+        before,after=functions(old),functions(new)
+        for name in before:
+            if name not in ['U_pbr','main']:
+                self.assertEqual(before[name],after[name],name)
+        # No original global assignment (kinetics, equilibrium, thermodynamics,
+        # stoichiometry and numerical controls) may change.
+        assignments=lambda tree:[ast.dump(n,include_attributes=False) for n in tree.body if isinstance(n,(ast.Assign,ast.AugAssign)) and not (isinstance(n,ast.Assign) and any(isinstance(t,ast.Name) and t.id=='TRANSPORT_CONFIGS' for t in n.targets))]
+        self.assertEqual(assignments(old),assignments(new))
 
     def test_cli_choices_and_conflicts(self):
         for args in [['--transport-config','printed_equations','--h-length','tube'],
