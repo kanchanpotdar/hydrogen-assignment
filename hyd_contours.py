@@ -121,7 +121,7 @@ def fig_axial(pool, out):
                 a.contour(ZZ, TT, F, levels=8, colors="k", linewidths=0.4)
             fig.colorbar(cf, ax=a, format="%.3g"); a.set_title(f"{cat}: {ttl}")
             a.set_xlabel("PBR axial position z [mm]"); a.set_ylabel("furnace temperature [K]")
-            a.axhline(853, c="r", ls="--", lw=0.8)                         # 853 K = the validated case
+            a.axhline(853, c="r", ls="--", lw=0.8)                         # supplied reference temperature (120 mL/min)
         fig.suptitle(f"{cat}, {FLOW_AXIAL:.0f} mL/min: axial maps vs furnace temperature (red dashed = 853 K; black contour = -1 K recovery). 1-D model.")
         fig.savefig(os.path.join(out, f"contours_axial_{cat}.png"), dpi=120, bbox_inches="tight", pad_inches=.2); plt.close(fig)
 

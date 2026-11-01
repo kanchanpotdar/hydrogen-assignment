@@ -55,16 +55,18 @@ def _need(fname):
 def load_experiment():
     """returns {catalyst: {species: (value, uncertainty)}} from fig4_experimental_points.csv"""
     out = {}
-    for r in csv.DictReader(open(_need("fig4_experimental_points.csv"))):
-        out.setdefault(r["catalyst"], {})[r["species"]] = (float(r["mole_fraction"]), float(r["digitization_uncertainty"]))
+    with open(_need("fig4_experimental_points.csv"), newline="") as stream:
+        for r in csv.DictReader(stream):
+            out.setdefault(r["catalyst"], {})[r["species"]] = (float(r["mole_fraction"]), float(r["digitization_uncertainty"]))
     return out
 
 
 def load_paper_curves():
     """returns {(species, catalyst): array[[z_mm, value], ...]} - paper simulation curves in the PBR (T in K)"""
     out = {}
-    for r in csv.DictReader(open(_need("fig4_digitized_curves.csv"))):
-        out.setdefault((r["species"], r["catalyst"]), []).append((float(r["z_mm"]), float(r["value"])))
+    with open(_need("fig4_digitized_curves.csv"), newline="") as stream:
+        for r in csv.DictReader(stream):
+            out.setdefault((r["species"], r["catalyst"]), []).append((float(r["z_mm"]), float(r["value"])))
     return {k: np.array(v) for k, v in out.items()}
 
 
@@ -186,10 +188,10 @@ def _main(out):
             if s != "T":                                            # symbol = experiment at the sampling point
                 a.plot([z[-1]], [EXP[c][s][0]], mk[c], mfc="none", mec=col[c], ms=9, mew=1.8)
         a.axvline(b["PBR_end"], ls="--", c="k", lw=1)               # PBR / P-R2 boundary
-        top = .98
-        a.text(b["PBR_end"] / 2, top, "PBR", ha="center", va="top", transform=a.get_xaxis_transform())
-        a.text(b["PBR_end"] + 1.5, top, "P-R2", ha="center", va="top", transform=a.get_xaxis_transform())
-        a.set_ylabel("temperature [K]" if s == "T" else "mole fraction"); a.set_title(s if s != "T" else "Temperature [K]"); a.set_xlabel("reactor length [mm]  (PBR | first 3 mm of P-R2)")
+        top = 1.01
+        a.text(b["PBR_end"] / 2, top, "PBR", ha="center", va="bottom", fontsize=9, transform=a.get_xaxis_transform())
+        a.text(b["PBR_end"] + 1.5, top, "P-R2", ha="center", va="bottom", fontsize=9, transform=a.get_xaxis_transform())
+        a.set_ylabel("temperature [K]" if s == "T" else "mole fraction"); a.set_title(s if s != "T" else "Temperature [K]", pad=25); a.set_xlabel("reactor length [mm]  (PBR | first 3 mm of P-R2)")
     # one shared legend below the panels (thick = paper simulation, dashed = this work, symbol = experiment)
     from matplotlib.lines import Line2D
     fig.legend(handles=[Line2D([], [], color="k", lw=6, alpha=0.25, label="paper simulation (digitised)"),

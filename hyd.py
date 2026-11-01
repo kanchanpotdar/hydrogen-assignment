@@ -578,9 +578,9 @@ def plot_results(results, fname, title="SMR laboratory reactor", pr2_mm=PR2_VALI
         z, y, T, b = profiles(res, pr2_mm, with_pr1)
         for ax, (nm, idx) in zip(axs[:5], PLOT_SPECIES[:5]):
             ax.plot(z, y[idx], color=COLORS.get(cat), label=cat)
-            ax.set_title(nm)
+            ax.set_title(nm, pad=25)
         axs[5].plot(z, T, color=COLORS.get(cat), label=cat)
-    axs[5].set_title("Temperature [K]")
+    axs[5].set_title("Temperature [K]", pad=25)
     for ax in axs:
         for xb in b.values():
             ax.axvline(xb, ls="--", c="grey", lw=0.8)   # dashed line = PBR / P-R2 boundary
@@ -590,8 +590,8 @@ def plot_results(results, fname, title="SMR laboratory reactor", pr2_mm=PR2_VALI
         else:
             sections += [(b["PBR_end"], z[-1], "P-R2")]
         for left, right, label in sections:
-            ax.text((left+right)/2, .98, label, transform=ax.get_xaxis_transform(),
-                    ha="center", va="top", fontsize=9)
+            ax.text((left+right)/2, 1.01, label, transform=ax.get_xaxis_transform(),
+                    ha="center", va="bottom", fontsize=9)
         ax.set_ylabel("temperature [K]" if ax is axs[5] else "mole fraction")
         ax.set_xlabel(f"axial position [mm]  ({_axlabel(with_pr1, pr2_mm)})")
         ax.grid(alpha=0.3)
@@ -714,7 +714,7 @@ def main():
         cats = [a.catalyst] if a.catalyst else ["HMMC", "57-4Q", "25-4Q"]
         results = {c: run(c, Tf=a.T, flow=a.flow, reactor=reactor) for c in cats}
 
-        # ---- console report: compositions at PBR exit, P-R1 exit and P-R2 validation point ----
+        # ---- console report: compositions at PBR exit, P-R1 exit and P-R2 display point ----
         print(f"Feed: CH4 5%, H2O 20%, He 75% | furnace {a.T:.0f} K | {a.flow:.0f} mL/min (RTP) | "
               f"PBR transport: {effective_transport(reactor)['configuration']} | H2 seed 1e-6 (numerical only)")
         for c, res in results.items():
