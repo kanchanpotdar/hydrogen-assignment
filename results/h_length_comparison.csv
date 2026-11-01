@@ -1,0 +1,7 @@
+h_length,catalyst,U_inlet_W_m2K,T_dip_K,T_dip_paper_text_K,n_species_curves,species_curve_RMSE,T_curve_RMSE_K,n_T_points,outlet_MAE_vs_experiment
+tube,HMMC,560,-109.5,,5,0.00063,1.6,49,0.00122
+tube,57-4Q,560,-21.6,20.0,5,0.00056,2.9,34,0.00394
+tube,25-4Q,560,-15.4,15.0,5,0.00051,3.5,54,0.00126
+particle,HMMC,1507,-96.8,,5,0.00248,17.0,49,0.00122
+particle,57-4Q,1507,-12.8,20.0,5,0.00151,6.8,34,0.00314
+particle,25-4Q,1507,-9.2,15.0,5,0.00116,1.7,54,0.00215
