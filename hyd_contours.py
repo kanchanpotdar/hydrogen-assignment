@@ -35,6 +35,7 @@ T_GRID = np.linspace(700, 1100, 17)         # furnace temperatures of the operat
 FLOW_GRID = np.linspace(60, 200, 11)        # feed flows of the operating window [mL/min at RTP]
 FLOW_AXIAL = 120.0                          # flow of the axial maps (the paper's main case)
 T_AXIAL = np.linspace(700, 1100, 33)        # furnace temperatures of the axial maps [K]
+AXIAL_SAMPLE_POINTS = 3200                  # resolves interpolation error; no solver/physics change
 Z_MM = np.linspace(0.0, 12.0, 241)          # PBR positions of the axial maps [mm] (PBR is 12 mm long)
 X_MIN_CO = 0.05                             # mask the CO ratio below this CH4 conversion
 PAPER_POINTS = [(853.0, 80.0), (853.0, 120.0)]   # the paper's two experimental conditions
@@ -81,7 +82,7 @@ def _axial(args):
     """one furnace temperature of the axial maps: returns the PBR profiles resampled on Z_MM"""
     cat, Tf = args
     try:
-        res = hyd.run(catalyst=cat, Tf=Tf, flow=FLOW_AXIAL, n=400)
+        res = hyd.run(catalyst=cat, Tf=Tf, flow=FLOW_AXIAL, n=AXIAL_SAMPLE_POINTS)
         _check_result(res, "axial", cat, Tf, FLOW_AXIAL)
         z, Y = res["PBR"]; z = z * 1e3                          # PBR positions [mm]
         y = hyd.mole_fractions(Y)                               # rows: CH4, H2O, CO, CO2, H2, He
@@ -165,7 +166,7 @@ def main(out=None, workers=4):
     settings = dict(reactor=asdict(hyd.SMR_REACTOR), configuration="v3_reproduction",
                     T_grid_K=T_GRID.tolist(), flow_grid_ml_min_RTP=FLOW_GRID.tolist(),
                     T_axial_K=T_AXIAL.tolist(), flow_axial_ml_min_RTP=FLOW_AXIAL,
-                    z_axial_mm=Z_MM.tolist(), workers=workers, solver=hyd.SOLVER,
+                    z_axial_mm=Z_MM.tolist(), PBR_axial_sample_points=AXIAL_SAMPLE_POINTS, workers=workers, solver=hyd.SOLVER,
                     rtol=1e-8*hyd.TOL_SCALE, atol_species=1e-16*hyd.TOL_SCALE,
                     atol_T=1e-6*hyd.TOL_SCALE, KP_MODEL=hyd.KP_MODEL, h2_seed=1e-6,
                     experimental_benchmark="853 K, 120 mL/min; 80 mL/min not validated here")

@@ -42,7 +42,7 @@ def main(workflow,out):
             with np.load(directory/f'axial_grid_{cat}.npz') as f:ts=f['T_K'];z=f['z_mm'];raw=f['fields']
             assert raw.shape==(33,6,241) and np.isfinite(raw).all()
             for idx in [0,12,32]:
-                temp=float(ts[idx]);base=h.run(cat,Tf=temp,flow=120,n=400);zz,Y=base['PBR'];y=h.mole_fractions(Y)
+                temp=float(ts[idx]);base=h.run(cat,Tf=temp,flow=120,n=c.AXIAL_SAMPLE_POINTS);zz,Y=base['PBR'];y=h.mole_fractions(Y)
                 independent=np.array([np.interp(z,zz*1000,values) for values in [y[0],y[4],y[2],y[3],y[1],Y[6]-temp]])
                 d=float(abs(independent-raw[idx]).max())
                 rows.append(dict(catalyst=cat,kind='axial',T_K=temp,flow_ml_min_RTP=120,max_species_or_ratio_difference=d,max_T_difference_K=float(abs(independent[-1]-raw[idx,-1]).max()),criterion=2e-5,passed=bool(d<=2e-5),description='stored map vs independently reconstructed V3 interpolation'))
