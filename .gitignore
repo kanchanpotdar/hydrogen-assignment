@@ -31,3 +31,6 @@ Thumbs.db
 *~
 *.tmp
 tmp/
+
+# Generated Matplotlib cache
+mplconfig/
