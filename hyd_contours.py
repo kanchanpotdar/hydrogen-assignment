@@ -40,11 +40,32 @@ X_MIN_CO = 0.05                             # mask the CO ratio below this CH4 c
 PAPER_POINTS = [(853.0, 80.0), (853.0, 120.0)]   # the paper's two experimental conditions
 
 
+# Optional per-point evidence destination initialized inside each worker.
+_CHECK_DIR = None
+
+
+def _init_checks(directory):
+    global _CHECK_DIR
+    _CHECK_DIR = directory
+
+
+def _check_result(res, kind, cat, T, flow):
+    from numerical_checks import require_valid
+    result = require_valid(res)
+    if _CHECK_DIR is not None:
+        import json
+        from pathlib import Path
+        result.update(kind=kind, catalyst=cat, T_K=float(T), flow_ml_min_RTP=float(flow))
+        Path(_CHECK_DIR, f"{kind}_{cat}_{T:.6f}_{flow:.6f}.json").write_text(
+            json.dumps(result, indent=2, allow_nan=False)+"\n")
+
+
 def _point(args):
     """one operating-window point: returns (X_CH4, y_H2 at outlet, CO/converted CH4)"""
     cat, Tf, flow = args
     try:
         res = hyd.run(catalyst=cat, Tf=Tf, flow=flow, n=200)    # full PBR -> P-R1 -> P-R2 chain
+        _check_result(res, "operating", cat, Tf, flow)
         F0 = res["F0"]                                          # inlet molar flows [mol/s]
         Fe = res["PR2"][1][:6, -1]                              # outlet molar flows of the 40 mm P-R2
         conv = (F0[0] - Fe[0]) / F0[0]                          # methane conversion
@@ -61,6 +82,7 @@ def _axial(args):
     cat, Tf = args
     try:
         res = hyd.run(catalyst=cat, Tf=Tf, flow=FLOW_AXIAL, n=400)
+        _check_result(res, "axial", cat, Tf, FLOW_AXIAL)
         z, Y = res["PBR"]; z = z * 1e3                          # PBR positions [mm]
         y = hyd.mole_fractions(Y)                               # rows: CH4, H2O, CO, CO2, H2, He
         f = lambda v: np.interp(Z_MM, z, v)                     # resample onto the common grid
@@ -75,6 +97,11 @@ def fig_operating(pool, out):
     import matplotlib; matplotlib.use("Agg"); import matplotlib.pyplot as plt
     jobs = [(c, T, q) for c in CATS for T in T_GRID for q in FLOW_GRID]
     r = np.array(pool.map(_point, jobs, chunksize=4)).reshape(len(CATS), len(T_GRID), len(FLOW_GRID), 3)
+    np.savez_compressed(os.path.join(out, "operating_grid.npz"),
+                        T_K=T_GRID, flow_ml_min_RTP=FLOW_GRID, fields=r,
+                        CO_ratio_mask=np.isnan(r[:, :, :, 2]),
+                        field_names=["CH4_conversion", "outlet_H2_mole_fraction", "CO_per_converted_CH4"],
+                        catalysts=CATS)
     titles = [("Methane conversion X$_{CH4}$ [-]", 0, (0, 1)),            # clipped to [0,1]: it cannot exceed 1
               ("H$_2$ mole fraction at outlet [-]", 1, None),
               ("CO / converted CH$_4$ [-]  (own metric)", 2, None)]
@@ -109,6 +136,9 @@ def fig_axial(pool, out):
     for cat in CATS:
         r = pool.map(_axial, [(cat, T) for T in T_AXIAL])                 # one profile set per furnace temperature
         fields = [np.ma.masked_invalid(np.array([x[k] for x in r])) for k in range(6)]
+        np.savez_compressed(os.path.join(out, f"axial_grid_{cat}.npz"),
+                            T_K=T_AXIAL, z_mm=Z_MM, fields=np.asarray(r),
+                            field_names=["CH4", "H2", "CO", "CO2", "H2O", "T_minus_furnace_K"])
         fig, ax = plt.subplots(2, 3, figsize=(16, 8.5), constrained_layout=True); ax = ax.ravel()
         for a, F, (ttl, cmap) in zip(ax, fields, names):
             if cmap == "RdBu_r":                                          # temperature deviation: asymmetric scale
@@ -141,7 +171,9 @@ def main(out=None, workers=4):
                     experimental_benchmark="853 K, 120 mL/min; 80 mL/min not validated here")
     with record_run(out, "contours", settings):
         print(f"using {workers} worker process(es)")
-        with Pool(workers) as pool:
+        check_dir = out / "physical_checks"
+        check_dir.mkdir()
+        with Pool(workers, initializer=_init_checks, initargs=(str(check_dir),)) as pool:
             fig_axial(pool, str(out))
             fig_operating(pool, str(out))
     print("done: contours written to", out)

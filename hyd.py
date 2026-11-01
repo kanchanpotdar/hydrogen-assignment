@@ -734,6 +734,11 @@ def main():
         for c, res in results.items():
             plot_axial_heatmaps(res, P(f"02_axial_fields_{c}.png"), c, a.pr2_mm, a.with_pr1)
         write_summary(results, P("smr_summary.csv"), a.pr2_mm)
+        for catalyst, result in results.items():
+            np.savez_compressed(P(f"profiles_{catalyst}.npz"), F0=result["F0"],
+                                **{section+"_"+name: result[section][i]
+                                   for section in ["PBR", "PR1", "PR2"]
+                                   for i, name in enumerate(["z_m", "state"])})
 
         # ---- optional studies -----------------------------------------------------------------
         if a.seed_study:
