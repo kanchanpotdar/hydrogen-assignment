@@ -280,6 +280,16 @@ def rate_wgs_gas(y, T):
 # ----------------------------------------------------------------------------
 # Geometry & operating conditions
 # ----------------------------------------------------------------------------
+# (Re characteristic length, Nu-to-h length, Pr conductivity).
+# The legacy h_length field remains effective when transport_config is None.
+TRANSPORT_CONFIGS = {
+    "v3_reproduction": ("tube", "tube", "gas"),
+    "v3_h_particle_only": ("tube", "particle", "gas"),
+    "particle_lengths_gas_pr": ("particle", "particle", "gas"),
+    "printed_equations": ("particle", "particle", "bed"),
+}
+
+
 @dataclass
 class Reactor:
     """geometry and options of the laboratory reactor (SI units); defaults = paper values"""
@@ -295,6 +305,41 @@ class Reactor:
     h_length: str = "tube"   # characteristic length in Nu->h: 'tube' or 'particle'
     dp: float = 0.2e-3
     U_scale: float = 1.0     # sensitivity knob: multiply PBR U
+    transport_config: str = None  # explicit named configuration overrides legacy h_length
+
+
+def effective_transport(r):
+    """Resolve named or legacy options. Lengths [m]; conductivity choice is explicit."""
+    name = r.transport_config
+    if name is None:
+        if r.h_length not in ("tube", "particle"):
+            raise ValueError("h_length must be tube or particle")
+        name = "v3_reproduction" if r.h_length == "tube" else "v3_h_particle_only"
+    if name not in TRANSPORT_CONFIGS:
+        raise ValueError(f"Unknown transport configuration: {name}")
+    re_length, h_length, pr_conductivity = TRANSPORT_CONFIGS[name]
+    return dict(configuration=name, Re_length_m=r.d if re_length == "tube" else r.dp,
+                Nu_length_m=r.d if h_length == "tube" else r.dp,
+                Pr_conductivity=pr_conductivity)
+
+
+def transport_from_properties(r, *, rho, us, mu, cp, kf, ks):
+    """PBR closure for supplied SI properties; supports tabulated-property diagnostics.
+
+    rho [kg/m3], us [m/s], mu [Pa s], cp [J/kg/K], kf/ks [W/m/K].
+    Returns U [W/m2/K] and local properties, definitions and dimensionless groups.
+    """
+    cfg = effective_transport(r)
+    kr = k_radial_ZS(kf, ks)
+    k_pr = kf if cfg["Pr_conductivity"] == "gas" else kr
+    Re = rho * us * cfg["Re_length_m"] / mu
+    Pr = cp * mu / k_pr
+    Nu = 2.67 + 0.53 * Re**0.77 * Pr**0.53
+    h = Nu * kr / cfg["Nu_length_m"]
+    U = r.U_scale / (1 / h + r.s / r.kw_glass)
+    return U, dict(Re=Re, Pr=Pr, Nu=Nu, kr=kr, kf=kf, us=us, mu=mu,
+                   rho=rho, cp=cp, h=h, ks=ks, k_Pr_W_mK=k_pr,
+                   kw_W_mK=r.kw_glass, U_W_m2K=U, **cfg)
 
 
 SMR_REACTOR = Reactor()      # SMR mode: furnace + 523 K P-R2 wall
@@ -313,14 +358,8 @@ def U_pbr(F, T, r):
     mu, kf, cpm, rho = mix_props(y, T)
     Ftot = F.sum()
     us = Ftot * R * T / (P_PA * area(r))
-    Re = rho * us * r.d / mu
-    Pr = cpm * mu / kf
-    Nu = 2.67 + 0.53 * Re**0.77 * Pr**0.53            # Singhal correlation (paper Eq. 16)
-    kr = k_radial_ZS(kf, k_solid(T))                  # effective radial conductivity of the bed
-    L = r.d if r.h_length == "tube" else r.dp         # length scale in Nu = h L / k_r. Paper TEXT: particle diameter;
-                                                      # default here: tube diameter (reproduces Fig. 4 better, see compare_h_length.py)
-    h = Nu * kr / L                                   # inner convective coefficient
-    return r.U_scale / (1 / h + r.s / r.kw_glass), dict(Re=Re, Pr=Pr, Nu=Nu, kr=kr, kf=kf, us=us, mu=mu, rho=rho, cp=cpm, h=h)
+    return transport_from_properties(r, rho=rho, us=us, mu=mu, cp=cpm,
+                                     kf=kf, ks=k_solid(T))
 
 
 def U_pipe(F, T, r, kw):
@@ -635,26 +674,35 @@ def main():
     ap.add_argument("--flow", type=float, default=120.0, help="total flow at RTP [mL/min]")
     ap.add_argument("--pr2-mm", type=float, default=PR2_VALIDATION_MM, help="P-R2 length shown/validated [mm]")
     ap.add_argument("--with-pr1", action="store_true", help="include the 50 mm P-R1 in plots (paper Fig. 4 omits it)")
-    ap.add_argument("--h-length", choices=["tube", "particle"], default="tube",
+    ap.add_argument("--h-length", choices=["tube", "particle"], default=None,
                     help="length scale in PBR Nu->h. Paper text says particle; default 'tube' reproduces Fig. 4 better (see compare_h_length.py)")
+    ap.add_argument("--transport-config", choices=list(TRANSPORT_CONFIGS), default=None,
+                    help="named PBR transport interpretation; default is v3_reproduction")
     ap.add_argument("--seed-study", action="store_true", help="run the H2-seed sensitivity study")
     ap.add_argument("--validate", action="store_true",
                     help="also run validation.py (Fig. 4 overlay + error table; needs the data/ folder)")
     ap.add_argument("--out", default=".", help="output directory")
     a = ap.parse_args()
+    if a.transport_config is not None and a.h_length is not None:
+        if TRANSPORT_CONFIGS[a.transport_config][1] != a.h_length:
+            ap.error("--h-length conflicts with --transport-config Nu-to-h length")
+    # The old validator always reruns defaults; prevent new alternatives from
+    # being silently presented as validated. General custom-case repair is Phase 3.
+    if a.validate and a.transport_config not in (None, "v3_reproduction"):
+        ap.error("alternative transport validation: use tools/compare_transport.py")
     os.makedirs(a.out, exist_ok=True)
 
     def P(f):                                          # helper: path inside the output directory
         return os.path.join(a.out, f)
 
     # ---- simulate -------------------------------------------------------------------------
-    reactor = Reactor(h_length=a.h_length)
+    reactor = Reactor(h_length=a.h_length or "tube", transport_config=a.transport_config)
     cats = [a.catalyst] if a.catalyst else ["HMMC", "57-4Q", "25-4Q"]
     results = {c: run(c, Tf=a.T, flow=a.flow, reactor=reactor) for c in cats}
 
     # ---- console report: compositions at PBR exit, P-R1 exit and P-R2 validation point ----
     print(f"Feed: CH4 5%, H2O 20%, He 75% | furnace {a.T:.0f} K | {a.flow:.0f} mL/min (RTP) | "
-          f"PBR h-length: {a.h_length} | H2 seed 1e-6 (numerical only)")
+          f"PBR transport: {effective_transport(reactor)['configuration']} | H2 seed 1e-6 (numerical only)")
     for c, res in results.items():
         s = summarize(res)
         print(f"\n{c}")
