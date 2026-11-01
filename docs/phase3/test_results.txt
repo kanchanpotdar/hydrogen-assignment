@@ -1,0 +1,70 @@
+test_contour_annotations_with_synthetic_fixture (test_reproducibility.ReproducibilityTests.test_contour_annotations_with_synthetic_fixture) ... /Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/.venv-phase1/lib/python3.11/site-packages/matplotlib/_fontconfig_pattern.py:64: PyparsingDeprecationWarning: 'oneOf' deprecated - use 'one_of'
+  prop = Group((name + Suppress("=") + comma_separated(value)) | oneOf(_CONSTANTS))
+/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/.venv-phase1/lib/python3.11/site-packages/matplotlib/_fontconfig_pattern.py:85: PyparsingDeprecationWarning: 'parseString' deprecated - use 'parse_string'
+  parse = parser.parseString(pattern)
+/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/.venv-phase1/lib/python3.11/site-packages/matplotlib/_fontconfig_pattern.py:89: PyparsingDeprecationWarning: 'resetCache' deprecated - use 'reset_cache'
+  parser.resetCache()
+/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/.venv-phase1/lib/python3.11/site-packages/matplotlib/_mathtext.py:45: PyparsingDeprecationWarning: 'enablePackrat' deprecated - use 'enable_packrat'
+  ParserElement.enablePackrat()
+In /Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/.venv-phase1/lib/python3.11/site-packages/matplotlib/mpl-data/stylelib/classic.mplstyle: 'parseString' deprecated - use 'parse_string'
+In /Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/.venv-phase1/lib/python3.11/site-packages/matplotlib/mpl-data/stylelib/classic.mplstyle: 'resetCache' deprecated - use 'reset_cache'
+/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/.venv-phase1/lib/python3.11/site-packages/matplotlib/_fontconfig_pattern.py:85: PyparsingDeprecationWarning: 'parseString' deprecated - use 'parse_string'
+  parse = parser.parseString(pattern)
+/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/.venv-phase1/lib/python3.11/site-packages/matplotlib/_fontconfig_pattern.py:89: PyparsingDeprecationWarning: 'resetCache' deprecated - use 'reset_cache'
+  parser.resetCache()
+/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/.venv-phase1/lib/python3.11/site-packages/matplotlib/_mathtext.py:2010: PyparsingDeprecationWarning: 'oneOf' deprecated - use 'one_of'
+  p.space          = oneOf(self._space_widths)("space")
+/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/.venv-phase1/lib/python3.11/site-packages/matplotlib/_mathtext.py:2012: PyparsingDeprecationWarning: 'oneOf' deprecated - use 'one_of'
+  p.style_literal  = oneOf(
+/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/.venv-phase1/lib/python3.11/site-packages/matplotlib/_mathtext.py:2020: PyparsingDeprecationWarning: 'leaveWhitespace' deprecated - use 'leave_whitespace'
+  )("sym").leaveWhitespace()
+/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/.venv-phase1/lib/python3.11/site-packages/matplotlib/_mathtext.py:2024: PyparsingDeprecationWarning: 'oneOf' deprecated - use 'one_of'
+  p.start_group    = Optional(r"\math" + oneOf(self._fontnames)("font")) + "{"
+/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/.venv-phase1/lib/python3.11/site-packages/matplotlib/_mathtext.py:2027: PyparsingDeprecationWarning: 'oneOf' deprecated - use 'one_of'
+  p.delim          = oneOf(self._delims)
+/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/.venv-phase1/lib/python3.11/site-packages/matplotlib/_mathtext.py:1984: PyparsingDeprecationWarning: 'setName' deprecated - use 'set_name'
+  val.setName(key)
+/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/.venv-phase1/lib/python3.11/site-packages/matplotlib/_mathtext.py:1987: PyparsingDeprecationWarning: 'setParseAction' deprecated - use 'set_parse_action'
+  val.setParseAction(getattr(self, key))
+/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/.venv-phase1/lib/python3.11/site-packages/matplotlib/_mathtext.py:1748: PyparsingDeprecationWarning: 'setParseAction' deprecated - use 'set_parse_action'
+  return Empty().setParseAction(raise_error)
+/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/.venv-phase1/lib/python3.11/site-packages/matplotlib/_mathtext.py:2088: PyparsingDeprecationWarning: 'endQuoteChar' argument is deprecated, use 'end_quote_char'
+  p.text = cmd(r"\text", QuotedString('{', '\\', endQuoteChar="}"))
+/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/.venv-phase1/lib/python3.11/site-packages/matplotlib/_mathtext.py:2097: PyparsingDeprecationWarning: 'oneOf' deprecated - use 'one_of'
+  + OneOrMore(oneOf(["_", "^"]) - p.placeable)("subsuper")
+/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/.venv-phase1/lib/python3.11/site-packages/matplotlib/_mathtext.py:2146: PyparsingDeprecationWarning: 'unquoteResults' argument is deprecated, use 'unquote_results'
+  p.math_string   = QuotedString('$', '\\', unquoteResults=False)
+/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/.venv-phase1/lib/python3.11/site-packages/matplotlib/_mathtext.py:2147: PyparsingDeprecationWarning: 'leaveWhitespace' deprecated - use 'leave_whitespace'
+  p.non_math      = Regex(r"(?:(?:\\[$])|[^$])*").leaveWhitespace()
+/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/.venv-phase1/lib/python3.11/site-packages/matplotlib/_mathtext.py:2170: PyparsingDeprecationWarning: 'parseString' deprecated - use 'parse_string'
+  result = self._expression.parseString(s)
+/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/.venv-phase1/lib/python3.11/site-packages/matplotlib/_mathtext.py:2197: PyparsingDeprecationWarning: 'parseString' deprecated - use 'parse_string'
+  return self._math_expression.parseString(toks[0][1:-1], parseAll=True)
+/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/.venv-phase1/lib/python3.11/site-packages/pyparsing/util.py:466: PyparsingDeprecationWarning: 'parseAll' argument is deprecated, use 'parse_all'
+  return fn(self, *args, **kwargs)
+/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/.venv-phase1/lib/python3.11/site-packages/matplotlib/_mathtext.py:2178: PyparsingDeprecationWarning: 'resetCache' deprecated - use 'reset_cache'
+  ParserElement.resetCache()
+ok
+test_custom_validation_rejected_before_output (test_reproducibility.ReproducibilityTests.test_custom_validation_rejected_before_output) ... ok
+test_display_alias_and_reference_data (test_reproducibility.ReproducibilityTests.test_display_alias_and_reference_data) ... ok
+test_output_safety_and_caller_relative_paths (test_reproducibility.ReproducibilityTests.test_output_safety_and_caller_relative_paths) ... ok
+test_plot_section_labels_and_heatmap_visibility (test_reproducibility.ReproducibilityTests.test_plot_section_labels_and_heatmap_visibility) ... ok
+test_success_and_failure_manifests (test_reproducibility.ReproducibilityTests.test_success_and_failure_manifests) ... ok
+test_workflow_uses_absolute_stage_directories (test_reproducibility.ReproducibilityTests.test_workflow_uses_absolute_stage_directories) ... Running hyd.py
+Running validation.py
+Running compare_h_length.py
+Running hyd_contours.py
+ok
+test_cli_choices_and_conflicts (test_transport.TransportTests.test_cli_choices_and_conflicts) ... ok
+test_default_profiles_and_csv_match_baseline (test_transport.TransportTests.test_default_profiles_and_csv_match_baseline) ... ok
+test_dimensional_scaling_and_wall_resistance (test_transport.TransportTests.test_dimensional_scaling_and_wall_resistance) ... ok
+test_equations_and_effective_parameters (test_transport.TransportTests.test_equations_and_effective_parameters) ... ok
+test_legacy_aliases_and_explicit_precedence (test_transport.TransportTests.test_legacy_aliases_and_explicit_precedence) ... ok
+test_scientific_core_unchanged (test_transport.TransportTests.test_scientific_core_unchanged) ... ok
+test_successful_named_and_legacy_cli (test_transport.TransportTests.test_successful_named_and_legacy_cli) ... ok
+
+----------------------------------------------------------------------
+Ran 14 tests in 8.560s
+
+OK
+All done. Results in /private/var/folders/xb/r7gm6t_n74b0_vsl2c__gtyc0000gp/T/tmpqjexer3r/workflow

@@ -134,7 +134,7 @@ stability and applicability verification are not claimed complete.
 ## Reference data and metric definitions
 
 - `data/fig4_experimental_points.csv`: 15 figure-read outlet compositions.
-  **Only this file** contains `digitization_uncertainty`: estimated figure-reading
+  **Among the reference inputs, only this file** contains `digitization_uncertainty`: estimated figure-reading
   errors, not the authors' experimental measurement uncertainties.
 - `data/fig4_digitized_curves.csv`: 2,223 points, 18 groups (six variables × three
   catalysts), visible PBR curve portions. 57-4Q temperature spans 0.148–1.7946 mm

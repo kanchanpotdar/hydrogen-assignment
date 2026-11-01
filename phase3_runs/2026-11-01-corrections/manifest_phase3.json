@@ -1,0 +1,85 @@
+{
+  "stage": "phase3",
+  "status": "COMPLETED",
+  "started_utc": "2026-11-01T16:57:51.357645+00:00",
+  "argv": [
+    "tools/verify_phase3.py",
+    "--out",
+    "phase3_runs/2026-11-01-corrections"
+  ],
+  "cwd": "/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model",
+  "output_directory": "/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/phase3_runs/2026-11-01-corrections",
+  "python": "3.11.1 (v3.11.1:a7a450f84a, Dec  6 2022, 15:24:06) [Clang 13.0.0 (clang-1300.0.29.30)]",
+  "executable": "/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/.venv-phase1/bin/python",
+  "platform": "macOS-26.5.1-arm64-arm-64bit",
+  "dependencies": {
+    "numpy": "2.2.6",
+    "scipy": "1.15.3",
+    "matplotlib": "3.10.3"
+  },
+  "git_commit": "bed7921487f63b9752dbab9060e9ce5730e5beea",
+  "git_status": "",
+  "settings": {
+    "scope": "default numeric regression and presentation corrections, not Phase 4"
+  },
+  "source_data_sha256": {
+    "compare_h_length.py": "4a494a69241c5e114c8be672ed2629d17d7f04685d61f987f7db7fa6cb154b26",
+    "data/fig4_digitized_curves.csv": "4560c6d773e1cf5a2f53be20605c4fbcb111bd85adae07950e5dfd5ad998aadf",
+    "data/fig4_experimental_points.csv": "51f7648d8e8b9a640281823449413e317f440797c762476d8f48cde1eaee4564",
+    "hyd.py": "504d899e0fba2e852450d25531be391ff5f3ee52e1ab836148b04b6582ed751e",
+    "hyd_contours.py": "db4439b72a9a72d4e477965d2cb1c1cc9d0613192668097be0311530d4d8dc8c",
+    "run_all.py": "8a1480290dffb527ddf7ed1bf6f18f0c0ce85f12c72d107bec4d4d1f9509190e",
+    "run_metadata.py": "6261e55b149236b206ad2d44eeb8a43a2bfad0a0c8db6683c8d716cc7fde59c3",
+    "tools/baseline_regression.py": "30e7e5c90f6673ae6a8e3e32d8008dab08f3c6e50fc52994abcc13a1c1846785",
+    "tools/compare_transport.py": "45edf244daea96fe83600f4fc6c800be53cf1fe1e5bbe2209875b7c0b1c925e7",
+    "tools/reproduce_phase1.py": "6bc39006a091fb9bcee9f9dac17b2d6b934bafd82c5b82ad5bca9bcfd440485d",
+    "tools/verify_phase3.py": "f6d2349434b527faf217a7c85b397683c697f07cdcadce096d6cc51fd8f31ed2",
+    "validation.py": "068c41cda77ecf6881200b81253ea4cbfbc6c94cb387ff44cef1670a2264ffa0"
+  },
+  "commands": [
+    {
+      "argv": [
+        "/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/.venv-phase1/bin/python",
+        "/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/hyd.py",
+        "--validate",
+        "--out",
+        "smr_model/phase3_runs/2026-11-01-corrections/model"
+      ],
+      "cwd": "/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/.venv-phase1/bin/python",
+        "/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/compare_h_length.py",
+        "--out",
+        "/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/phase3_runs/2026-11-01-corrections/h_length_sensitivity"
+      ],
+      "cwd": "/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model",
+      "returncode": 0
+    }
+  ],
+  "finished_utc": "2026-11-01T16:57:59.140607+00:00",
+  "output_sha256": {
+    "compare_h_length.py.log": "db8a6a0614d12185db40ba695ebd8e108d41a0f8eb22ba3b71d9e024cfa7d4cb",
+    "h_length_sensitivity/h_length_comparison.csv": "d3c3f63f53d29047a3de30a5132163b8c1b095d6374fc43a49a5da9b592cf259",
+    "h_length_sensitivity/h_length_comparison.png": "5790a1e3282edce655627ceec95c9aa9f9832cf1cd07cf3cbcfe16fe1cb50f35",
+    "h_length_sensitivity/manifest_compare_h_length.json": "becf6d73746118c797cb91f122d3f3607a4f9d6bae1acb7ab5d745e173eb4807",
+    "hyd.py.log": "9e3e68513b328b6b7c194369648fd2d42b0e0677c6a5aa99b711eff86ea34eed",
+    "model/01_smr_results.png": "dfdb5a5faf586da4920f654bceac8d27f07d8342c8a8e5c89e18fd9108fc88d1",
+    "model/02_axial_fields_25-4Q.png": "d85c5b6e9dbf45d978cbf9c5b5bc7a2ada494831a1426c781fc1ab1da2def7c6",
+    "model/02_axial_fields_57-4Q.png": "ebcabb26f37e66df023731255d6e64d309a323f035778f36331c906809e14c00",
+    "model/02_axial_fields_HMMC.png": "6ecf1db92f49316aba117cf001e6fc5f8bf3d2411ad9d3d0a0f36c7a997229a3",
+    "model/fixed_reference/digitization_coverage.csv": "6cd54f80db909b0d2e91d6e02b296dac01eaaed7533f215881ed51f81606a5f1",
+    "model/fixed_reference/experimental_metrics.csv": "3e16af6f1c279dd16cf6687522500087b0a2710585d739bd3ca7ccc4648a9553",
+    "model/fixed_reference/manifest_validation.json": "79b9c28a5b76120ef18d6c7cfbca66ee11886a5b30e0bbeeac8c717a194396b6",
+    "model/fixed_reference/published_curve_metrics.csv": "7db4c78306eaf1f8e2e5c4cd9d2794e03102436f63d68cee05d92deb9314690d",
+    "model/fixed_reference/validation_equilibrium.csv": "a2d858e76f6383023720c94e090c3ee0f5787369a25a6ed252732b8e8f568454",
+    "model/fixed_reference/validation_fig4_overlay.png": "4c7c04cc1c802ffa51e3a77c2e856ddd4f85c39cdfc7129e58ddf1ae700cc0cc",
+    "model/fixed_reference/validation_table.csv": "d057a344c8b7423081034a0bb1dfe837ec9314eb2b7311c4ba68f0a1c8e00673",
+    "model/fixed_reference/validation_table.md": "097214f1d508a3e3b519cf279733febc1ec25ef848d1574058be840900222875",
+    "model/manifest_hyd.json": "950dfbc5415faacfe7e07e1ebd4fdcdb987143028a3d582d39ec4db722220351",
+    "model/smr_summary.csv": "63e44b3686fdcb32f5757a1b11e0270c689278d1b3fdbe97967427b03e92be81",
+    "numeric_regression.json": "c59b389be16982faf03b9a43a31b8c1e36cbe0989ec36b7852763eaad3c32108"
+  }
+}

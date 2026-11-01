@@ -1,0 +1,77 @@
+{
+  "stage": "validation",
+  "status": "COMPLETED",
+  "started_utc": "2026-11-01T16:57:54.249198+00:00",
+  "argv": [
+    "/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/hyd.py",
+    "--validate",
+    "--out",
+    "smr_model/phase3_runs/2026-11-01-corrections/model"
+  ],
+  "cwd": "/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen",
+  "output_directory": "/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/phase3_runs/2026-11-01-corrections/model/fixed_reference",
+  "python": "3.11.1 (v3.11.1:a7a450f84a, Dec  6 2022, 15:24:06) [Clang 13.0.0 (clang-1300.0.29.30)]",
+  "executable": "/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/.venv-phase1/bin/python",
+  "platform": "macOS-26.5.1-arm64-arm-64bit",
+  "dependencies": {
+    "numpy": "2.2.6",
+    "scipy": "1.15.3",
+    "matplotlib": "3.10.3"
+  },
+  "git_commit": "bed7921487f63b9752dbab9060e9ce5730e5beea",
+  "git_status": "?? phase3_runs/",
+  "settings": {
+    "benchmark": "Figure 4",
+    "T_K": 853.0,
+    "flow_ml_min_RTP": 120.0,
+    "reactor": {
+      "d": 0.006,
+      "s": 0.001,
+      "L_pbr": 0.012,
+      "L_pr1": 0.05,
+      "L_pr2": 0.04,
+      "m_cat": 8.82e-05,
+      "kw_glass": 1.6,
+      "kw_steel": 16.3,
+      "T_pr2_wall": 523.0,
+      "h_length": "tube",
+      "dp": 0.0002,
+      "U_scale": 1.0,
+      "transport_config": null
+    },
+    "pressure_bar": 1.01325,
+    "solver": "LSODA",
+    "rtol": 1e-08,
+    "atol_species": 1e-16,
+    "atol_T": 1e-06,
+    "KP_MODEL": "D",
+    "h2_seed": 1e-06,
+    "experimental_location": "P-R2 full 40 mm outlet",
+    "species_curve_domain": "PBR z>0.05 mm",
+    "temperature_curve_domain": "PBR z>0.15 mm"
+  },
+  "source_data_sha256": {
+    "compare_h_length.py": "4a494a69241c5e114c8be672ed2629d17d7f04685d61f987f7db7fa6cb154b26",
+    "data/fig4_digitized_curves.csv": "4560c6d773e1cf5a2f53be20605c4fbcb111bd85adae07950e5dfd5ad998aadf",
+    "data/fig4_experimental_points.csv": "51f7648d8e8b9a640281823449413e317f440797c762476d8f48cde1eaee4564",
+    "hyd.py": "504d899e0fba2e852450d25531be391ff5f3ee52e1ab836148b04b6582ed751e",
+    "hyd_contours.py": "db4439b72a9a72d4e477965d2cb1c1cc9d0613192668097be0311530d4d8dc8c",
+    "run_all.py": "8a1480290dffb527ddf7ed1bf6f18f0c0ce85f12c72d107bec4d4d1f9509190e",
+    "run_metadata.py": "6261e55b149236b206ad2d44eeb8a43a2bfad0a0c8db6683c8d716cc7fde59c3",
+    "tools/baseline_regression.py": "30e7e5c90f6673ae6a8e3e32d8008dab08f3c6e50fc52994abcc13a1c1846785",
+    "tools/compare_transport.py": "45edf244daea96fe83600f4fc6c800be53cf1fe1e5bbe2209875b7c0b1c925e7",
+    "tools/reproduce_phase1.py": "6bc39006a091fb9bcee9f9dac17b2d6b934bafd82c5b82ad5bca9bcfd440485d",
+    "tools/verify_phase3.py": "f6d2349434b527faf217a7c85b397683c697f07cdcadce096d6cc51fd8f31ed2",
+    "validation.py": "068c41cda77ecf6881200b81253ea4cbfbc6c94cb387ff44cef1670a2264ffa0"
+  },
+  "finished_utc": "2026-11-01T16:57:55.462270+00:00",
+  "output_sha256": {
+    "digitization_coverage.csv": "6cd54f80db909b0d2e91d6e02b296dac01eaaed7533f215881ed51f81606a5f1",
+    "experimental_metrics.csv": "3e16af6f1c279dd16cf6687522500087b0a2710585d739bd3ca7ccc4648a9553",
+    "published_curve_metrics.csv": "7db4c78306eaf1f8e2e5c4cd9d2794e03102436f63d68cee05d92deb9314690d",
+    "validation_equilibrium.csv": "a2d858e76f6383023720c94e090c3ee0f5787369a25a6ed252732b8e8f568454",
+    "validation_fig4_overlay.png": "4c7c04cc1c802ffa51e3a77c2e856ddd4f85c39cdfc7129e58ddf1ae700cc0cc",
+    "validation_table.csv": "d057a344c8b7423081034a0bb1dfe837ec9314eb2b7311c4ba68f0a1c8e00673",
+    "validation_table.md": "097214f1d508a3e3b519cf279733febc1ec25ef848d1574058be840900222875"
+  }
+}
