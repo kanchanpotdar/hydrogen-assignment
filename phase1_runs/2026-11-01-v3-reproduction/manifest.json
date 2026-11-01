@@ -1,0 +1,187 @@
+{
+  "baseline_commit": "a5782cc54e89dc7117b82b076279a75452e85903",
+  "execution_commit": "f8e64078b53a7acf150dd3b0ebb553021fd6ecb3",
+  "python": "3.11.1 (v3.11.1:a7a450f84a, Dec  6 2022, 15:24:06) [Clang 13.0.0 (clang-1300.0.29.30)]",
+  "executable": "/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/.venv-phase1/bin/python",
+  "platform": "macOS-26.5.1-arm64-arm-64bit",
+  "started_utc": "2026-11-01T15:54:06Z",
+  "configuration": {
+    "T_K": 853.0,
+    "flow_ml_min_RTP": 120.0,
+    "pressure_bar": 1.01325,
+    "h_length": "tube",
+    "KP_MODEL": "D",
+    "solver": "LSODA",
+    "rtol": 1e-08,
+    "atol_species": 1e-16,
+    "atol_T": 1e-06,
+    "h2_seed": 1e-06
+  },
+  "packages": {
+    "kiwisolver": "1.5.1",
+    "numpy": "2.2.6",
+    "packaging": "26.3",
+    "contourpy": "1.3.3",
+    "matplotlib": "3.10.3",
+    "setuptools": "65.5.0",
+    "pillow": "13.0.0",
+    "cycler": "0.12.1",
+    "fonttools": "4.68.0",
+    "tzdata": "2026.6",
+    "pip": "22.3.1",
+    "python-dateutil": "4.0.0",
+    "scipy": "1.15.3",
+    "pyparsing": "3.3.3"
+  },
+  "working_tree": "",
+  "files": {
+    "compare_h_length.py": {
+      "baseline_sha256": "2926e25c878c0d85d86ef337b306bc89abd009b9643540b51b61704b905769ff",
+      "current_sha256": "2926e25c878c0d85d86ef337b306bc89abd009b9643540b51b61704b905769ff"
+    },
+    "data/fig4_digitized_curves.csv": {
+      "baseline_sha256": "4560c6d773e1cf5a2f53be20605c4fbcb111bd85adae07950e5dfd5ad998aadf",
+      "current_sha256": "4560c6d773e1cf5a2f53be20605c4fbcb111bd85adae07950e5dfd5ad998aadf"
+    },
+    "data/fig4_experimental_points.csv": {
+      "baseline_sha256": "51f7648d8e8b9a640281823449413e317f440797c762476d8f48cde1eaee4564",
+      "current_sha256": "51f7648d8e8b9a640281823449413e317f440797c762476d8f48cde1eaee4564"
+    },
+    "hyd.py": {
+      "baseline_sha256": "8986e042ff2c98b3c0b36b1030be97754baa864bbb05b979f1e967c94ff6374e",
+      "current_sha256": "8986e042ff2c98b3c0b36b1030be97754baa864bbb05b979f1e967c94ff6374e"
+    },
+    "hyd_contours.py": {
+      "baseline_sha256": "818d7de1a9e07a83e5d10b2daa45cc94d6d87297acd1fd2f12d61b45aa10a57f",
+      "current_sha256": "818d7de1a9e07a83e5d10b2daa45cc94d6d87297acd1fd2f12d61b45aa10a57f"
+    },
+    "results/01_smr_results.png": {
+      "baseline_sha256": "ddd7f23bee5ca2df1d3726ad3c8b64e02f448226373fb3678bb824e5dd31e263",
+      "current_sha256": "ddd7f23bee5ca2df1d3726ad3c8b64e02f448226373fb3678bb824e5dd31e263"
+    },
+    "results/02_axial_fields_25-4Q.png": {
+      "baseline_sha256": "8f884adedfa161e70596f507289b0aff3e84e6ccc841d516c9271245065cad50",
+      "current_sha256": "8f884adedfa161e70596f507289b0aff3e84e6ccc841d516c9271245065cad50"
+    },
+    "results/02_axial_fields_57-4Q.png": {
+      "baseline_sha256": "62cb1190ad81ca5c0924777fd95c89346ef430a9c9d439dd7e11d8d99bd40441",
+      "current_sha256": "62cb1190ad81ca5c0924777fd95c89346ef430a9c9d439dd7e11d8d99bd40441"
+    },
+    "results/02_axial_fields_HMMC.png": {
+      "baseline_sha256": "ff58f8873b4fcbcb39231b27b8ecbb910b955862a7a2dc0730cb2cbbc621cad3",
+      "current_sha256": "ff58f8873b4fcbcb39231b27b8ecbb910b955862a7a2dc0730cb2cbbc621cad3"
+    },
+    "results/contours_axial_25-4Q.png": {
+      "baseline_sha256": "c6e772d0c8ae7edc7cf7a9d97c650faced96585169dbad9f81353a3f8ddcec30",
+      "current_sha256": "c6e772d0c8ae7edc7cf7a9d97c650faced96585169dbad9f81353a3f8ddcec30"
+    },
+    "results/contours_axial_57-4Q.png": {
+      "baseline_sha256": "da01cbfd84308148694ae81c192da8412fe82c9afbe8ee5ba34df2d5145e13de",
+      "current_sha256": "da01cbfd84308148694ae81c192da8412fe82c9afbe8ee5ba34df2d5145e13de"
+    },
+    "results/contours_axial_HMMC.png": {
+      "baseline_sha256": "661760427767e324642668322c56ee361e05a9ac82bbc358936fec16d9be733a",
+      "current_sha256": "661760427767e324642668322c56ee361e05a9ac82bbc358936fec16d9be733a"
+    },
+    "results/contours_operating_window.png": {
+      "baseline_sha256": "34482cac0dc06554c8ca0b97119eaa4ea8d25113437f3f5fa935f8194713346b",
+      "current_sha256": "34482cac0dc06554c8ca0b97119eaa4ea8d25113437f3f5fa935f8194713346b"
+    },
+    "results/h_length_comparison.csv": {
+      "baseline_sha256": "4a36544c279979d510091940c3fe8e7531828051306c7d58faf7edd1b0a51aa7",
+      "current_sha256": "4a36544c279979d510091940c3fe8e7531828051306c7d58faf7edd1b0a51aa7"
+    },
+    "results/h_length_comparison.png": {
+      "baseline_sha256": "0c8cafa79747f7164c7a13ae3242d69729816911d59ec13f87db5a4ad0322d11",
+      "current_sha256": "0c8cafa79747f7164c7a13ae3242d69729816911d59ec13f87db5a4ad0322d11"
+    },
+    "results/smr_summary.csv": {
+      "baseline_sha256": "44c7a91ea43205dd8e7a2785e2485f40b0ea73b4d66c6be0434055d9c371d2eb",
+      "current_sha256": "44c7a91ea43205dd8e7a2785e2485f40b0ea73b4d66c6be0434055d9c371d2eb"
+    },
+    "results/validation_equilibrium.csv": {
+      "baseline_sha256": "cd2514daafd37701a79655c0485857be5130b6b1fb98ae6027657a203f2251a1",
+      "current_sha256": "cd2514daafd37701a79655c0485857be5130b6b1fb98ae6027657a203f2251a1"
+    },
+    "results/validation_fig4_overlay.png": {
+      "baseline_sha256": "eec8702ff3d5bc0e3b84e925909a67ae0138a530da82c204a5fdd234dff7707b",
+      "current_sha256": "eec8702ff3d5bc0e3b84e925909a67ae0138a530da82c204a5fdd234dff7707b"
+    },
+    "results/validation_table.csv": {
+      "baseline_sha256": "c163b8d695fe9f7129b03c4162577199ff9ebb209df515c7bc67aedcaa2c0055",
+      "current_sha256": "c163b8d695fe9f7129b03c4162577199ff9ebb209df515c7bc67aedcaa2c0055"
+    },
+    "results/validation_table.md": {
+      "baseline_sha256": "dbd282e3a023ef32456cbca286b1fb4f0d73ffcbd3addefcde964cb8a3020ec7",
+      "current_sha256": "dbd282e3a023ef32456cbca286b1fb4f0d73ffcbd3addefcde964cb8a3020ec7"
+    },
+    "run_all.py": {
+      "baseline_sha256": "0f2b35dbf6994f14d569f03857ff1a8a992efde69b6fff12132edf4f6128b329",
+      "current_sha256": "0f2b35dbf6994f14d569f03857ff1a8a992efde69b6fff12132edf4f6128b329"
+    },
+    "validation.py": {
+      "baseline_sha256": "a479bf66c907f933dec20ef1c85af5a1cbeebb2850803e471c12290d7a7e29a3",
+      "current_sha256": "a479bf66c907f933dec20ef1c85af5a1cbeebb2850803e471c12290d7a7e29a3"
+    }
+  },
+  "commands": [
+    {
+      "argv": [
+        "/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/.venv-phase1/bin/python",
+        "/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/hyd.py",
+        "--out",
+        "/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/phase1_runs/2026-11-01-v3-reproduction"
+      ],
+      "cwd": "/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model",
+      "returncode": 0,
+      "seconds": 44.52436854195548
+    },
+    {
+      "argv": [
+        "/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/.venv-phase1/bin/python",
+        "/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/validation.py",
+        "--out",
+        "/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/phase1_runs/2026-11-01-v3-reproduction"
+      ],
+      "cwd": "/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model",
+      "returncode": 0,
+      "seconds": 2.0286724159959704
+    },
+    {
+      "argv": [
+        "/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/.venv-phase1/bin/python",
+        "/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/compare_h_length.py",
+        "--out",
+        "/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model/phase1_runs/2026-11-01-v3-reproduction"
+      ],
+      "cwd": "/Users/kanchanpotdar/Library/CloudStorage/OneDrive-Personal/hydrogen/smr_model",
+      "returncode": 0,
+      "seconds": 2.2839087499887682
+    }
+  ],
+  "status": "PASS",
+  "diagnostic_execution": "Three additional default h.run calls: all catalysts; conservation and detailed metrics.",
+  "output_hashes": {
+    "compare_h_length.py.log": "db8a6a0614d12185db40ba695ebd8e108d41a0f8eb22ba3b71d9e024cfa7d4cb",
+    "profiles_25-4Q.npz": "55ccc20af6dec78a591e1d9240947f0069977fe2817af7ac73b60be80c435923",
+    "sanity_checks.json": "d4dbd779a52e3f69bd33d059623a076ad6be4e1feea4d3b0d5b1daf3e8aba195",
+    "validation_metrics.json": "3ba26dc933487a7345970b76210291eab49f20744d9f3eb0fa69df4bbae3a709",
+    "02_axial_fields_25-4Q.png": "43d9792b781f8b25f5d80044404a6d44281558d79caaca371a0c7567df142807",
+    "validation_table.md": "dbd282e3a023ef32456cbca286b1fb4f0d73ffcbd3addefcde964cb8a3020ec7",
+    "h_length_comparison.csv": "4a36544c279979d510091940c3fe8e7531828051306c7d58faf7edd1b0a51aa7",
+    "hyd.py.log": "74a9ea2e95f5748f471158032014b1db6a11027e25929839c2074a49309aa3e3",
+    "validation.py.log": "8666640026407a3bbcd67e212213aaed54fff3c417260896789bc77de13dceff",
+    "profiles_57-4Q.npz": "5b4adfa4bea93fcb7fb51bd9d59bd8ecab56aec85850282be95e51026cc1b921",
+    "validation_table.csv": "c163b8d695fe9f7129b03c4162577199ff9ebb209df515c7bc67aedcaa2c0055",
+    "02_axial_fields_HMMC.png": "03de3436be7c6363cc02e3eec56d14c68dd981b228e60002cc392fceeb60669f",
+    "validation_equilibrium.csv": "cd2514daafd37701a79655c0485857be5130b6b1fb98ae6027657a203f2251a1",
+    "csv_comparison.json": "ee13ce8bd52d0f6d82a69825258c9dfb5520f22fd7bef48dbc634512496732a0",
+    "h_length_comparison.png": "9dcaf4f1f5f276a63fbae91a29fa79dd2d5eda802a5023e68c0425beb3ec5777",
+    "01_smr_results.png": "378197ccf63695dd8aa6377dbea40f3b598aab280d696b711eafb12ac339b7ac",
+    "smr_summary.csv": "44c7a91ea43205dd8e7a2785e2485f40b0ea73b4d66c6be0434055d9c371d2eb",
+    "validation_fig4_overlay.png": "2a5ff35826f4edada47a779b5763a3aab4afabbbe14c885bab700b4e096ad187",
+    "profiles_HMMC.npz": "759a54d3d748db7a335cfb8aa543956ed157e2217f2e5d1ebfa8ee789563302d",
+    "02_axial_fields_57-4Q.png": "2cace865f5541881a00991ced94ea90bf53fde121e847259fc4d444c336ca17e"
+  },
+  "finished_utc": "2026-11-01T15:54:56Z"
+}

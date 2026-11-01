@@ -1,0 +1,11 @@
+{
+  "command": [
+    ".venv-phase1/bin/python",
+    "tools/reproduce_phase1.py",
+    "--out",
+    "results"
+  ],
+  "returncode": 1,
+  "stderr": "Output must be a new directory, separate from preserved results.\n",
+  "expected_refusal": true
+}

@@ -38,6 +38,16 @@ Figure 4 validation covers 853 K and 120 mL/min only. The 80 mL/min star marks a
 paper experimental condition, not an independently validated case here.
 These are operating-condition maps from a 1-D model, not radial–axial CFD fields.
 
+## Phase 1 reproduction evidence
+
+The unchanged V3 numerical baseline was reproduced in an isolated environment.
+See the [Phase 1 report](docs/phase1/baseline_reproduction_report.md),
+[predeclared acceptance criteria](docs/phase1/acceptance_criteria.md), and
+[transport specification](docs/phase1/transport_specification.md).
+Versioned evidence is in [the Phase 1 run](phase1_runs/2026-11-01-v3-reproduction/).
+This verifies the defined baseline scope, not the complete contour workflow or
+physical correctness of alternative transport interpretations.
+
 ## Folder contents (keep together)
 
 | File | Purpose |

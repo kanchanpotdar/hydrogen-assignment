@@ -1,0 +1,35 @@
+{
+  "HMMC": {
+    "passed": true,
+    "min_raw_flow_mol_s": 0.0,
+    "normalization_error": 2.220446049250313e-16,
+    "relative_C_H_O_He_errors": [
+      1.7086850701562002e-15,
+      1.2656884255987296e-15,
+      1.518831173472178e-15,
+      0.0
+    ]
+  },
+  "57-4Q": {
+    "passed": true,
+    "min_raw_flow_mol_s": 0.0,
+    "normalization_error": 2.220446049250313e-16,
+    "relative_C_H_O_He_errors": [
+      4.556493520416534e-15,
+      6.328442127993648e-16,
+      2.0883928635242447e-15,
+      0.0
+    ]
+  },
+  "25-4Q": {
+    "passed": true,
+    "min_raw_flow_mol_s": 0.0,
+    "normalization_error": 2.220446049250313e-16,
+    "relative_C_H_O_He_errors": [
+      2.847808450260334e-15,
+      1.0125507404789836e-15,
+      9.492694834201112e-16,
+      0.0
+    ]
+  }
+}
