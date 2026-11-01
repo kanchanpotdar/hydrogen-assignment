@@ -25,7 +25,7 @@ MODES = ["tube", "particle"]
 DIP_TEXT = {"57-4Q": 20.0, "25-4Q": 15.0}          # K, paper section 4.2 (HMMC dip is only described as "deep")
 
 
-def main(out="."):
+def _main(out):
     import os
     os.makedirs(out, exist_ok=True)
     EXP, DIG = load_experiment(), load_paper_curves()
@@ -55,7 +55,7 @@ def main(out="."):
         rows.append(dict(h_length=m, catalyst=c,
                          U_inlet_W_m2K=round(h.U_pbr(res["F0"], 853.0, reactor)[0]),
                          T_dip_K=round(float(T[n].min() - 853.0), 1), T_dip_paper_text_K=DIP_TEXT.get(c, ""),
-                         n_species_curves=len(sp_rmse), species_curve_RMSE=round(float(np.mean(sp_rmse)), 5),
+                         n_species_curves=len(sp_rmse), mean_species_RMSE=round(float(np.mean(sp_rmse)), 5),
                          T_curve_RMSE_K=t_rmse, n_T_points=n_t,
                          outlet_MAE_vs_experiment=round(float(np.mean([abs(ex[s] - EXP[c][s][0]) for s in ex])), 5)))
     with open(os.path.join(out, "h_length_comparison.csv"), "w", newline="") as f:
@@ -63,7 +63,7 @@ def main(out="."):
     print(f"{'L':9s}{'cat':7s}{'U':>6s}{'dT[K]':>8s}{'paper':>7s}{'nSp':>4s}{'spRMSE':>9s}{'T RMSE':>8s}{'nT':>5s}{'outMAE':>9s}")
     for r in rows:
         print(f"{r['h_length']:9s}{r['catalyst']:7s}{r['U_inlet_W_m2K']:6d}{r['T_dip_K']:8.1f}"
-              f"{str(r['T_dip_paper_text_K']):>7s}{r['n_species_curves']:4d}{r['species_curve_RMSE']:9.5f}{str(r['T_curve_RMSE_K']):>8s}{r['n_T_points']:5d}"
+              f"{str(r['T_dip_paper_text_K']):>7s}{r['n_species_curves']:4d}{r['mean_species_RMSE']:9.5f}{str(r['T_curve_RMSE_K']):>8s}{r['n_T_points']:5d}"
               f"{r['outlet_MAE_vs_experiment']:9.5f}")
 
     # ---- plot: tube (solid) vs particle (dashed) vs paper (thick) ---------------------------------
@@ -78,18 +78,31 @@ def main(out="."):
                 a.plot(z[n], (T if s == "T" else y[IDX[s]])[n], ls[m], color=col[c], lw=1.4)
             if (s, c) in DIG:
                 d = DIG[(s, c)]; a.plot(d[:, 0], d[:, 1], color=col[c], alpha=0.25, lw=6)
-        a.set_title(s); a.set_xlabel("PBR z [mm]")
+        a.set_title(s); a.set_xlabel("PBR z [mm]"); a.set_ylabel("temperature [K]" if s == "T" else "mole fraction")
     ax[5].set_xlim(0, 4)                                               # zoom on the inlet temperature dip
     from matplotlib.lines import Line2D
     fig.legend(handles=[Line2D([], [], color="k", ls="-", label="L = tube diameter"),
                         Line2D([], [], color="k", ls="--", label="L = particle diameter"),
                         Line2D([], [], color="k", lw=6, alpha=0.25, label="paper Fig. 4 (digitised)")],
                loc="lower center", ncol=3)
-    fig.suptitle("PBR heat-transfer length scale vs paper Fig. 4 (853 K, 120 mL/min)")
-    fig.tight_layout(rect=(0, 0.05, 1, 1)); fig.savefig(os.path.join(out, "h_length_comparison.png"), dpi=130)
+    fig.suptitle("Nu-to-h length sensitivity (Re remains tube-based): 853 K, 120 mL/min\nred HMMC; black 57-4Q; green 25-4Q")
+    fig.tight_layout(rect=(0, 0.05, 1, 1)); fig.savefig(os.path.join(out, "h_length_comparison.png"), dpi=130, bbox_inches="tight", pad_inches=.2)
+
+
+def main(out=None):
+    from run_metadata import prepare_output, record_run
+    from dataclasses import asdict
+    out = prepare_output(out, "compare_h_length")
+    with record_run(out, "compare_h_length", dict(T_K=853., flow_ml_min_RTP=120.,
+                    configurations=["v3_reproduction", "v3_h_particle_only"],
+                    reactor=asdict(h.SMR_REACTOR), pressure_bar=h.P_BAR, solver=h.SOLVER,
+                    rtol=1e-8*h.TOL_SCALE, atol_species=1e-16*h.TOL_SCALE,
+                    atol_T=1e-6*h.TOL_SCALE, KP_MODEL=h.KP_MODEL, h2_seed=1e-6,
+                    species_domain="PBR z>0.05 mm", temperature_domain="0.15<z<5 mm")):
+        return _main(str(out))
 
 
 if __name__ == "__main__":
     import argparse
-    ap = argparse.ArgumentParser(); ap.add_argument("--out", default=".")
+    ap = argparse.ArgumentParser(); ap.add_argument("--out", default=None)
     main(ap.parse_args().out)

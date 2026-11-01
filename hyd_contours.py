@@ -12,8 +12,8 @@ IMPORTANT NOTES (state them in the report)
     NOT two-dimensional spatial (r, z) contours.
   * Operating-window values are taken at the physical P-R2 outlet (40 mm); the paper's Fig. 4 shows only
     the first 3 mm of P-R2.
-  * Only 853 K with 80 and 120 mL/min is validated against the paper (red stars). Everything else is a
-    model prediction outside the validated range.
+  * Supplied Figure 4 comparisons cover 853 K and 120 mL/min only. Red stars mark
+    paper experimental conditions, including 80 mL/min without supplied validation data here.
   * "CO / converted CH4" = F_CO,out / (F_CH4,in - F_CH4,out). It is this work's own metric, NOT a quantity
     of the paper and not called "selectivity". It is masked where X_CH4 < 5 % (ratio undefined).
   * A failed simulation point is reported with its conditions and the error is re-raised
@@ -90,13 +90,13 @@ def fig_operating(pool, out):
             cf = a.contourf(TT, QQ, Z, levels=lv, cmap="viridis")         # filled contours
             cs = a.contour(TT, QQ, Z, levels=lv[::2], colors="k", linewidths=0.5)   # labelled lines
             a.clabel(cs, fontsize=6, fmt="%.3g")
-            a.plot(*zip(*PAPER_POINTS), "r*", ms=13, mec="w", label="paper experiments")   # validated points
-            fig.colorbar(cf, ax=a)
+            a.plot(*zip(*PAPER_POINTS), "r*", ms=13, mec="w", label="paper experiments")   # paper conditions, not additional validation
+            fig.colorbar(cf, ax=a, format="%.3g")
             a.set_title(f"{cat}: {ttl}", fontsize=10)
             a.set_xlabel("furnace temperature [K]"); a.set_ylabel("feed flow [mL/min RTP]")
     ax[0, 0].legend(loc="lower right", fontsize=8)
-    fig.suptitle("SMR operating window (outlet of the 40 mm P-R2). Validated only at the red stars; elsewhere extrapolation.")
-    fig.savefig(os.path.join(out, "contours_operating_window.png"), dpi=130); plt.close(fig)
+    fig.suptitle("SMR predictions: full 40 mm P-R2 outlet; stars mark paper conditions.\nSupplied benchmark: 853 K, 120 mL/min only.")
+    fig.savefig(os.path.join(out, "contours_operating_window.png"), dpi=130, bbox_inches="tight", pad_inches=.2); plt.close(fig)
 
 
 def fig_axial(pool, out):
@@ -119,22 +119,37 @@ def fig_axial(pool, out):
             else:
                 cf = a.contourf(ZZ, TT, F, levels=20, cmap=cmap)
                 a.contour(ZZ, TT, F, levels=8, colors="k", linewidths=0.4)
-            fig.colorbar(cf, ax=a); a.set_title(f"{cat}: {ttl}")
+            fig.colorbar(cf, ax=a, format="%.3g"); a.set_title(f"{cat}: {ttl}")
             a.set_xlabel("PBR axial position z [mm]"); a.set_ylabel("furnace temperature [K]")
             a.axhline(853, c="r", ls="--", lw=0.8)                         # 853 K = the validated case
-        fig.suptitle(f"{cat}, {FLOW_AXIAL:.0f} mL/min: axial maps vs furnace temperature (red dashed = 853 K). 1-D model.")
-        fig.savefig(os.path.join(out, f"contours_axial_{cat}.png"), dpi=120); plt.close(fig)
+        fig.suptitle(f"{cat}, {FLOW_AXIAL:.0f} mL/min: axial maps vs furnace temperature (red dashed = 853 K; black contour = -1 K recovery). 1-D model.")
+        fig.savefig(os.path.join(out, f"contours_axial_{cat}.png"), dpi=120, bbox_inches="tight", pad_inches=.2); plt.close(fig)
+
+
+def main(out=None, workers=4):
+    import multiprocessing as mp
+    from run_metadata import prepare_output, record_run
+    from dataclasses import asdict
+    out = prepare_output(out, "contours")
+    workers = max(1, min(workers, mp.cpu_count()))
+    settings = dict(reactor=asdict(hyd.SMR_REACTOR), configuration="v3_reproduction",
+                    T_grid_K=T_GRID.tolist(), flow_grid_ml_min_RTP=FLOW_GRID.tolist(),
+                    T_axial_K=T_AXIAL.tolist(), flow_axial_ml_min_RTP=FLOW_AXIAL,
+                    z_axial_mm=Z_MM.tolist(), workers=workers, solver=hyd.SOLVER,
+                    rtol=1e-8*hyd.TOL_SCALE, atol_species=1e-16*hyd.TOL_SCALE,
+                    atol_T=1e-6*hyd.TOL_SCALE, KP_MODEL=hyd.KP_MODEL, h2_seed=1e-6,
+                    experimental_benchmark="853 K, 120 mL/min; 80 mL/min not validated here")
+    with record_run(out, "contours", settings):
+        print(f"using {workers} worker process(es)")
+        with Pool(workers) as pool:
+            fig_axial(pool, str(out))
+            fig_operating(pool, str(out))
+    print("done: contours written to", out)
 
 
 if __name__ == "__main__":
     import argparse
-    import multiprocessing as mp
-    ap = argparse.ArgumentParser(); ap.add_argument("--out", default=".")
-    ap.add_argument("--workers", type=int, default=4, help="number of parallel worker processes (default 4)")
-    a = ap.parse_args(); os.makedirs(a.out, exist_ok=True)
-    workers = max(1, min(a.workers, mp.cpu_count()))                      # predictable, never more than the cores
-    print(f"using {workers} worker process(es)")
-    with Pool(workers) as pool:
-        fig_axial(pool, a.out)
-        fig_operating(pool, a.out)
-    print("done: contours_axial_*.png and contours_operating_window.png written to", os.path.abspath(a.out))
+    ap = argparse.ArgumentParser(); ap.add_argument("--out", default=None)
+    ap.add_argument("--workers", type=int, default=4)
+    a = ap.parse_args()
+    main(a.out, a.workers)

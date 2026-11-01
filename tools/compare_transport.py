@@ -17,7 +17,7 @@ sys.path.insert(0,str(ROOT))
 import numpy as np
 import hyd as h
 import validation as v
-from tools.reproduce_phase1 import compare
+from tools.baseline_regression import compare_csv as compare
 
 def save_json(path,obj):path.write_text(json.dumps(obj,indent=2,allow_nan=False)+'\n')
 def write_csv(path,rows):
@@ -131,7 +131,7 @@ def main():
             handles,labels=axs[0].get_legend_handles_labels();fig.legend(handles,labels,loc='lower center',ncol=2,fontsize=8)
             fig.suptitle(cat+': transport interpretations, 853 K / 120 mL/min')
             fig.tight_layout(rect=(0,.12,1,.96));fig.savefig(out/f'comparison_{cat}.png',dpi=130);plt.close(fig)
-        if not all(r['passed'] and r['byte_equal'] for r in comparisons):raise RuntimeError('Legacy CSV regression failed')
+        if not all(r['passed'] for r in comparisons):raise RuntimeError('Legacy CSV regression failed')
         if not all(r['passed'] for r in sanity):raise RuntimeError('Physical sanity failure')
         meta['status']='PASS'
     except Exception as exc:

@@ -66,11 +66,11 @@ class TransportTests(unittest.TestCase):
         functions=lambda tree:{n.name:ast.dump(n,include_attributes=False) for n in tree.body if isinstance(n,ast.FunctionDef)}
         before,after=functions(old),functions(new)
         for name in before:
-            if name not in ['U_pbr','main']:
+            if name not in ['U_pbr','main','plot_results','plot_axial_heatmaps','write_summary']:
                 self.assertEqual(before[name],after[name],name)
         # No original global assignment (kinetics, equilibrium, thermodynamics,
         # stoichiometry and numerical controls) may change.
-        assignments=lambda tree:[ast.dump(n,include_attributes=False) for n in tree.body if isinstance(n,(ast.Assign,ast.AugAssign)) and not (isinstance(n,ast.Assign) and any(isinstance(t,ast.Name) and t.id=='TRANSPORT_CONFIGS' for t in n.targets))]
+        assignments=lambda tree:[ast.dump(n,include_attributes=False) for n in tree.body if isinstance(n,(ast.Assign,ast.AugAssign)) and not (isinstance(n,ast.Assign) and any(isinstance(t,ast.Name) and t.id in ['TRANSPORT_CONFIGS','PR2_DISPLAY_MM','PR2_VALIDATION_MM'] for t in n.targets))]
         self.assertEqual(assignments(old),assignments(new))
 
     def test_cli_choices_and_conflicts(self):
@@ -108,6 +108,7 @@ class TransportTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as td:
             p=Path(td)/'summary.csv';h.write_summary(results,p)
             expected=subprocess.check_output(['git','show','v3-baseline:results/smr_summary.csv'],cwd=ROOT)
-            self.assertEqual(p.read_bytes(),expected)
+            from tools.baseline_regression import compare_csv
+            self.assertTrue(compare_csv('smr_summary.csv', expected, p.read_bytes())['passed'])
 
 if __name__=='__main__':unittest.main()

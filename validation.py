@@ -18,8 +18,8 @@ DATA (mandatory, in ./data/ next to this file; the script stops with an error if
                                 H2/H2O diamonds that are partly hidden by the 57-4Q circles). It is NOT the
                                 experimental measurement uncertainty of Costamagna et al., which is not published.
   fig4_digitized_curves.csv     the paper's simulated curves (18 curve sets = 6 variables x 3 catalysts), digitised by
-                                colour from the PDF figure. Coverage is complete except where a line is hidden behind
-                                another: 57-4Q CO2 misses z = 2.7-4 mm, 57-4Q T exists only for z = 0.15-2.4 mm
+                                colour from the PDF figure. Coverage is limited to visible PBR portions; some lines are hidden behind
+                                another: 57-4Q CO2 has a gap between z = 2.5512-4.0866 mm, 57-4Q T spans z = 0.148-1.7946 mm
                                 (the black line lies under the green/red ones), HMMC T for z = 0.15-8.5 mm.
 
 TWO KINDS OF AGREEMENT ARE REPORTED SEPARATELY
@@ -77,7 +77,7 @@ def exit_composition(res):
 # --------------------------------------------------------------------------------------------------
 # Main validation routine
 # --------------------------------------------------------------------------------------------------
-def main(out="."):
+def _main(out):
     os.makedirs(out, exist_ok=True)
     P = lambda f: os.path.join(out, f)
     EXP, CURVES = load_experiment(), load_paper_curves()
@@ -92,28 +92,44 @@ def main(out="."):
         for s in SPECIES:
             e, tol = EXP[c][s]                                     # experiment, figure-reading uncertainty
             m = ym[s]
-            rows.append(dict(catalyst=c, species=s, experiment=e, model=round(m, 5), abs_err=round(m - e, 5),
+            rows.append(dict(catalyst=c, species=s, experiment=e, model=round(m, 5), signed_error=round(m - e, 5), absolute_error=round(abs(m - e), 5),
                              rel_err_pct=round(100 * (m - e) / e, 1), digitization_uncertainty=tol,
                              within_digitization_uncertainty=bool(abs(m - e) <= tol)))
     with open(P("validation_table.csv"), "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=list(rows[0])); w.writeheader(); w.writerows(rows)
     with open(P("validation_table.md"), "w") as f:             # same table, ready to paste into the report
         f.write("Experimental values were read from Fig. 4 (no numerical table in the paper); model = P-R2 outlet.\n\n")
-        f.write("| Catalyst | Species | Experiment (Fig. 4) | This work | Abs. error | % error |\n|---|---|---:|---:|---:|---:|\n")
+        f.write("| Catalyst | Species | Experiment (Fig. 4) | This work | Signed error | Signed % error |\n|---|---|---:|---:|---:|---:|\n")
         for r in rows:
             f.write(f"| {r['catalyst']} | {r['species']} | {r['experiment']:.4f} | {r['model']:.4f} | "
-                    f"{r['abs_err']:+.4f} | {r['rel_err_pct']:+.1f} |\n")
+                    f"{r['signed_error']:+.4f} | {r['rel_err_pct']:+.1f} |\n")
 
     print("(B) MODEL vs EXPERIMENT at the P-R2 outlet (experiment values read from Fig. 4)")
-    print(f"{'catalyst':9s}{'species':8s}{'exp':>9s}{'model':>9s}{'abs err':>10s}{'% err':>8s}   within digitization uncertainty")
+    print(f"{'catalyst':9s}{'species':8s}{'exp':>9s}{'model':>9s}{'signed err':>10s}{'% err':>8s}   within digitization uncertainty")
     for r in rows:
         print(f"{r['catalyst']:9s}{r['species']:8s}{r['experiment']:9.4f}{r['model']:9.4f}"
-              f"{r['abs_err']:+10.4f}{r['rel_err_pct']:+8.1f}   {r['within_digitization_uncertainty']}")
+              f"{r['signed_error']:+10.4f}{r['rel_err_pct']:+8.1f}   {r['within_digitization_uncertainty']}")
     print("\nError statistics of the outlet composition (MAE, RMSE, mean |% error|):")
     for c in CATS:
-        e = np.array([r["abs_err"] for r in rows if r["catalyst"] == c])
+        e = np.array([r["signed_error"] for r in rows if r["catalyst"] == c])
         p = np.array([abs(r["rel_err_pct"]) for r in rows if r["catalyst"] == c])
         print(f"  {c:6s} MAE={np.mean(abs(e)):.4f}  RMSE={np.sqrt(np.mean(e**2)):.4f}  mean|%err|={np.mean(p):.1f}")
+
+    with open(P("experimental_metrics.csv"), "w", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=["catalyst", "MAE", "RMSE", "MAPE_pct", "n_species"])
+        writer.writeheader()
+        for c in CATS:
+            ym = exit_composition(results[c])
+            errors = np.array([ym[s]-EXP[c][s][0] for s in SPECIES])
+            percentages = [100*abs(ym[s]-EXP[c][s][0])/EXP[c][s][0] for s in SPECIES]
+            writer.writerow(dict(catalyst=c, MAE=np.mean(abs(errors)), RMSE=np.sqrt(np.mean(errors**2)),
+                                 MAPE_pct=np.mean(percentages), n_species=len(SPECIES)))
+    with open(P("digitization_coverage.csv"), "w", newline="") as f:
+        writer = csv.writer(f); writer.writerow(["catalyst", "variable", "n_points", "z_min_mm", "z_max_mm", "largest_gap_mm"])
+        for (s, c), d in sorted(CURVES.items()):
+            zz = np.sort(d[:,0])
+            writer.writerow([c, s, len(d), zz.min(), zz.max(), np.diff(zz).max() if len(zz)>1 else 0])
+    curve_metrics = []
 
     # ---- 3) curves vs the paper's own simulation (PBR, z > 0.05 mm) ------------------------------
     print("\n(A) MODEL vs the paper's PUBLISHED SIMULATION: RMSE of the PBR curves (mole fraction; T in K).")
@@ -128,15 +144,22 @@ def main(out="."):
             ncurves += 1
             d = CURVES[(s, c)]; d = d[d[:, 0] > 0.15 if s == "T" else d[:, 0] > 0.05]
             mine = np.interp(d[:, 0], z[n], (T if s == "T" else y[IDX[s]])[n])
-            parts.append(f"{s}={np.sqrt(np.mean((mine - d[:, 1]) ** 2)):.4g}")
+            rmse = np.sqrt(np.mean((mine - d[:, 1]) ** 2))
+            parts.append(f"{s}={rmse:.4g}")
+            curve_metrics.append(dict(catalyst=c, variable=s, n_points=len(d), z_min_mm=d[:,0].min(),
+                                      z_max_mm=d[:,0].max(), RMSE=rmse, units="K" if s=="T" else "mole fraction"))
         print(f"  {c:6s} (n={ncurves}) " + "  ".join(parts))
+
+    with open(P("published_curve_metrics.csv"), "w", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=list(curve_metrics[0]))
+        writer.writeheader(); writer.writerows(curve_metrics)
 
     # ---- 4) HMMC equilibrium check ----------------------------------------------------------------
     eq = h.equilibrium([0.05, 0.20, 0.0, 0.0, 0.0, 0.75], TF)    # feed composition, 853 K, 1 atm
     z, y, T, b = h.profiles(results["HMMC"]); n = z <= b["PBR_end"]
     print("\nHMMC PBR outlet vs thermodynamic equilibrium at 853 K (paper: equilibrium after about 2 mm):")
     with open(P("validation_equilibrium.csv"), "w", newline="") as f:
-        w = csv.writer(f); w.writerow(["species", "HMMC_PBR_exit", "equilibrium", "abs_diff"])
+        w = csv.writer(f); w.writerow(["species", "HMMC_PBR_exit", "equilibrium", "signed_difference"])
         for s in SPECIES:
             a_, b_ = y[IDX[s]][n][-1], eq[IDX[s]]
             w.writerow([s, round(a_, 5), round(b_, 5), round(a_ - b_, 5)])
@@ -163,25 +186,40 @@ def main(out="."):
             if s != "T":                                            # symbol = experiment at the sampling point
                 a.plot([z[-1]], [EXP[c][s][0]], mk[c], mfc="none", mec=col[c], ms=9, mew=1.8)
         a.axvline(b["PBR_end"], ls="--", c="k", lw=1)               # PBR / P-R2 boundary
-        top = a.get_ylim()[1]
-        a.text(b["PBR_end"] / 2, top, "PBR", ha="center", va="top")
-        a.text(b["PBR_end"] + 1.5, top, "P-R2", ha="center", va="top")
-        a.set_title(s if s != "T" else "Temperature [K]"); a.set_xlabel("reactor length [mm]  (PBR | first 3 mm of P-R2)")
+        top = .98
+        a.text(b["PBR_end"] / 2, top, "PBR", ha="center", va="top", transform=a.get_xaxis_transform())
+        a.text(b["PBR_end"] + 1.5, top, "P-R2", ha="center", va="top", transform=a.get_xaxis_transform())
+        a.set_ylabel("temperature [K]" if s == "T" else "mole fraction"); a.set_title(s if s != "T" else "Temperature [K]"); a.set_xlabel("reactor length [mm]  (PBR | first 3 mm of P-R2)")
     # one shared legend below the panels (thick = paper simulation, dashed = this work, symbol = experiment)
     from matplotlib.lines import Line2D
     fig.legend(handles=[Line2D([], [], color="k", lw=6, alpha=0.25, label="paper simulation (digitised)"),
                         Line2D([], [], color="k", ls="--", label="this work"),
-                        Line2D([], [], color="k", marker="D", mfc="none", ls="", label="paper experiment (read from Fig. 4)")],
-               loc="lower center", ncol=3, bbox_to_anchor=(0.5, 0.025))
+                        *[Line2D([], [], color=col[c], marker=mk[c], mfc="none", ls="", label=f"{c}: experiment (digitized)") for c in CATS]],
+               loc="lower center", ncol=3, bbox_to_anchor=(0.5, 0.035), fontsize=9)
     fig.suptitle("Fig. 4 reproduction: 853 K, 120 mL/min (red HMMC, black 57-4Q, green 25-4Q)")
     fig.text(0.5, 0.012, "Experimental symbols are the P-R2 OUTLET compositions (40 mm); as in the paper's Fig. 4 they are drawn at the end of "
              "the displayed 3-mm P-R2 segment.", ha="center", fontsize=8)
-    fig.tight_layout(rect=(0, 0.07, 1, 1)); fig.savefig(P("validation_fig4_overlay.png"), dpi=130); plt.close(fig)
+    fig.tight_layout(rect=(0, 0.12, 1, .97)); fig.savefig(P("validation_fig4_overlay.png"), dpi=130, bbox_inches="tight", pad_inches=.2); plt.close(fig)
     print(f"\nWrote validation_table.csv/.md, validation_equilibrium.csv, validation_fig4_overlay.png to {os.path.abspath(out)}")
     return rows
 
 
+def main(out=None):
+    """Standalone fixed Figure 4 benchmark, independent of custom simulations."""
+    from run_metadata import prepare_output, record_run
+    from dataclasses import asdict
+    out = prepare_output(out, "validation")
+    settings = dict(benchmark="Figure 4", T_K=TF, flow_ml_min_RTP=FLOW,
+                    reactor=asdict(h.SMR_REACTOR), pressure_bar=h.P_BAR,
+                    solver=h.SOLVER, rtol=1e-8*h.TOL_SCALE, atol_species=1e-16*h.TOL_SCALE,
+                    atol_T=1e-6*h.TOL_SCALE, KP_MODEL=h.KP_MODEL, h2_seed=1e-6,
+                    experimental_location="P-R2 full 40 mm outlet",
+                    species_curve_domain="PBR z>0.05 mm", temperature_curve_domain="PBR z>0.15 mm")
+    with record_run(out, "validation", settings):
+        return _main(str(out))
+
+
 if __name__ == "__main__":
     import argparse
-    ap = argparse.ArgumentParser(); ap.add_argument("--out", default=".")
+    ap = argparse.ArgumentParser(); ap.add_argument("--out", default=None)
     main(ap.parse_args().out)

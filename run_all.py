@@ -1,18 +1,31 @@
-"""run_all.py - runs the complete workflow in the right order (several minutes, mostly the contour stage).
-   1) hyd.py              model run, results plots, summary csv
-   2) validation.py       Fig. 4 overlay, error table, equilibrium check
-   3) compare_h_length.py tube- vs particle-diameter comparison
-   4) hyd_contours.py     operating-window and axial contour figures
-   All outputs go to ./results (change with --out)."""
-import argparse, os, subprocess, sys
+"""Run the default workflow into isolated stage directories with execution manifests."""
+import argparse
+from pathlib import Path
+import subprocess
+import sys
+from run_metadata import prepare_output, record_run
 
-ap = argparse.ArgumentParser(); ap.add_argument("--out", default="results")
-ap.add_argument("--workers", type=int, default=4, help="parallel workers of the contour stage")
-a = ap.parse_args()
-os.makedirs(a.out, exist_ok=True)
-here = os.path.dirname(os.path.abspath(__file__))
-for script, extra in (("hyd.py", ["--seed-study"]), ("validation.py", []),
-                      ("compare_h_length.py", []), ("hyd_contours.py", ["--workers", str(a.workers)])):
-    print(f"\n=== {script} ===", flush=True)
-    subprocess.run([sys.executable, os.path.join(here, script), "--out", a.out] + extra, check=True, cwd=here)
-print("\nAll done. Results in", os.path.abspath(a.out))
+
+def main(out=None, workers=4):
+    out = prepare_output(out, 'workflow')
+    here = Path(__file__).resolve().parent
+    stages = [('hyd.py', ['--seed-study'], 'model'), ('validation.py', [], 'fixed_reference'),
+              ('compare_h_length.py', [], 'h_length_sensitivity'),
+              ('hyd_contours.py', ['--workers', str(workers)], 'contours')]
+    with record_run(out, 'workflow', dict(configuration='v3_reproduction', workers=workers)) as record:
+        record['commands'] = []
+        for script, extra, folder in stages:
+            command = [sys.executable, str(here/script), '--out', str(out/folder), *extra]
+            print(f'Running {script}', flush=True)
+            result = subprocess.run(command, cwd=here)
+            record['commands'].append(dict(argv=command, returncode=result.returncode))
+            result.check_returncode()
+    print('All done. Results in', out)
+
+
+if __name__ == '__main__':
+    ap = argparse.ArgumentParser()
+    ap.add_argument('--out', default=None)
+    ap.add_argument('--workers', type=int, default=4)
+    args = ap.parse_args()
+    main(args.out, args.workers)

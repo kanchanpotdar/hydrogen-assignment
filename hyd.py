@@ -530,7 +530,8 @@ def equilibrium(y_in, T):
 # colours as in the paper: HMMC red, 57-4Q black, 25-4Q green
 COLORS = {"HMMC": "tab:red", "57-4Q": "k", "25-4Q": "tab:green"}
 PLOT_SPECIES = [("CH4", iCH4), ("H2", iH2), ("CO", iCO), ("CO2", iCO2), ("H2O", iH2O), ("He", iHe)]
-PR2_VALIDATION_MM = 3.0     # paper Fig. 4 integrates/reports only the first 3 mm of P-R2
+PR2_DISPLAY_MM = 3.0       # displayed segment, not the physical sampling outlet
+PR2_VALIDATION_MM = PR2_DISPLAY_MM  # backward-compatible public alias
 
 
 def profiles(res, pr2_mm=PR2_VALIDATION_MM, with_pr1=False):
@@ -583,15 +584,21 @@ def plot_results(results, fname, title="SMR laboratory reactor", pr2_mm=PR2_VALI
     for ax in axs:
         for xb in b.values():
             ax.axvline(xb, ls="--", c="grey", lw=0.8)   # dashed line = PBR / P-R2 boundary
-        ymax = ax.get_ylim()[1]
-        ax.text(b["PBR_end"] / 2, ymax, "PBR", ha="center", va="top", fontsize=9)
-        ax.text(b["PBR_end"] + (axs[0].get_xlim()[1] - b["PBR_end"]) / 2, ymax, "P-R2", ha="center", va="top", fontsize=9)
+        sections = [(0, b["PBR_end"], "PBR")]
+        if "PR1_end" in b:
+            sections += [(b["PBR_end"], b["PR1_end"], "P-R1"), (b["PR1_end"], z[-1], "P-R2")]
+        else:
+            sections += [(b["PBR_end"], z[-1], "P-R2")]
+        for left, right, label in sections:
+            ax.text((left+right)/2, .98, label, transform=ax.get_xaxis_transform(),
+                    ha="center", va="top", fontsize=9)
+        ax.set_ylabel("temperature [K]" if ax is axs[5] else "mole fraction")
         ax.set_xlabel(f"axial position [mm]  ({_axlabel(with_pr1, pr2_mm)})")
         ax.grid(alpha=0.3)
     axs[0].legend()
     fig.suptitle(title)
-    fig.tight_layout()
-    fig.savefig(fname, dpi=150)
+    fig.tight_layout(rect=(.05, 0, 1, .96))
+    fig.savefig(fname, dpi=150, bbox_inches="tight", pad_inches=.2)
     plt.close(fig)
 
 
@@ -615,13 +622,13 @@ def plot_axial_heatmaps(res, fname, catalyst, pr2_mm=PR2_VALIDATION_MM, with_pr1
         fig.colorbar(im, ax=ax, label=unit, pad=0.01)
     axs[-1].set_xlabel(f"axial position [mm]  ({_axlabel(with_pr1, pr2_mm)})")
     fig.suptitle(f"{catalyst}: 1-D axial fields (not radial contours; model is 1-D)")
-    fig.tight_layout()
-    fig.savefig(fname, dpi=150)
+    fig.tight_layout(rect=(.05, 0, 1, .96))
+    fig.savefig(fname, dpi=150, bbox_inches="tight", pad_inches=.2)
     plt.close(fig)
 
 
 def point_at_pr2(res, mm):
-    # state of the gas mm millimetres into P-R2 (used for the 3 mm validation point)
+    # state of the gas mm millimetres into P-R2 (used for the displayed 3 mm segment)
     """(mole fractions, T, molar flows) at mm into P-R2"""
     z2, Y2 = res["PR2"]
     k = min(int(np.searchsorted(z2, mm * 1e-3)), len(z2) - 1)
@@ -641,9 +648,9 @@ def write_summary(results, fname, pr2_mm=PR2_VALIDATION_MM):
                 Y = res[sec][1]
                 rows.append((lab, mole_fractions(Y)[:, -1], Y[6, -1], Y[:6, -1]))
             y, T, F = point_at_pr2(res, pr2_mm)
-            rows.append((f"P-R2 at {pr2_mm:g} mm (validation point)", y, T, F))
+            rows.append((f"P-R2 at {pr2_mm:g} mm (displayed Figure 4 segment)", y, T, F))
             Y = res["PR2"][1]
-            rows.append(("P-R2 full 40 mm (extrapolation beyond paper Fig. 4)",
+            rows.append(("P-R2 full 40 mm (experimental sampling outlet)",
                          mole_fractions(Y)[:, -1], Y[6, -1], Y[:6, -1]))
             for lab, y, T, F in rows:
                 w.writerow([cat, lab] + [f"{v:.6f}" for v in y] + [f"{T:.2f}", f"{1 - F[iCH4] / F0[iCH4]:.4f}"])
@@ -672,7 +679,7 @@ def main():
     ap.add_argument("--catalyst", default=None, choices=["HMMC", "57-4Q", "25-4Q"], help="default: all three")
     ap.add_argument("--T", type=float, default=853.0, help="furnace temperature [K]")
     ap.add_argument("--flow", type=float, default=120.0, help="total flow at RTP [mL/min]")
-    ap.add_argument("--pr2-mm", type=float, default=PR2_VALIDATION_MM, help="P-R2 length shown/validated [mm]")
+    ap.add_argument("--pr2-mm", type=float, default=PR2_VALIDATION_MM, help="P-R2 length displayed [mm]; measurements are at the full outlet")
     ap.add_argument("--with-pr1", action="store_true", help="include the 50 mm P-R1 in plots (paper Fig. 4 omits it)")
     ap.add_argument("--h-length", choices=["tube", "particle"], default=None,
                     help="length scale in PBR Nu->h. Paper text says particle; default 'tube' reproduces Fig. 4 better (see compare_h_length.py)")
@@ -681,56 +688,63 @@ def main():
     ap.add_argument("--seed-study", action="store_true", help="run the H2-seed sensitivity study")
     ap.add_argument("--validate", action="store_true",
                     help="also run validation.py (Fig. 4 overlay + error table; needs the data/ folder)")
-    ap.add_argument("--out", default=".", help="output directory")
+    ap.add_argument("--out", default=None, help="output directory")
     a = ap.parse_args()
     if a.transport_config is not None and a.h_length is not None:
         if TRANSPORT_CONFIGS[a.transport_config][1] != a.h_length:
             ap.error("--h-length conflicts with --transport-config Nu-to-h length")
-    # The old validator always reruns defaults; prevent new alternatives from
-    # being silently presented as validated. General custom-case repair is Phase 3.
-    if a.validate and a.transport_config not in (None, "v3_reproduction"):
-        ap.error("alternative transport validation: use tools/compare_transport.py")
-    os.makedirs(a.out, exist_ok=True)
-
-    def P(f):                                          # helper: path inside the output directory
-        return os.path.join(a.out, f)
-
-    # ---- simulate -------------------------------------------------------------------------
     reactor = Reactor(h_length=a.h_length or "tube", transport_config=a.transport_config)
-    cats = [a.catalyst] if a.catalyst else ["HMMC", "57-4Q", "25-4Q"]
-    results = {c: run(c, Tf=a.T, flow=a.flow, reactor=reactor) for c in cats}
+    if a.validate and (a.T != 853.0 or a.flow != 120.0 or a.catalyst is not None
+                       or effective_transport(reactor)["configuration"] != "v3_reproduction"):
+        ap.error("--validate is the fixed Figure 4 benchmark: 853 K, 120 mL/min, all catalysts, v3_reproduction. Run validation.py separately for that benchmark.")
+    from dataclasses import asdict
+    from run_metadata import prepare_output, record_run
+    a.out = str(prepare_output(a.out, "hyd"))
+    settings = dict(reactor=asdict(reactor), effective_transport=effective_transport(reactor),
+                    T_K=a.T, flow_ml_min_RTP=a.flow, catalysts=a.catalyst or "all",
+                    feed_mol_fraction=[.05,.20,0,0,0,.75], pressure_bar=P_BAR,
+                    solver=SOLVER, rtol=1e-8*TOL_SCALE, atol_species=1e-16*TOL_SCALE,
+                    atol_T=1e-6*TOL_SCALE, KP_MODEL=KP_MODEL, h2_seed=1e-6,
+                    display_pr2_mm=a.pr2_mm, with_pr1=a.with_pr1, seed_study=a.seed_study)
+    with record_run(a.out, "hyd", settings):
+        def P(f):                                          # helper: path inside the output directory
+            return os.path.join(a.out, f)
 
-    # ---- console report: compositions at PBR exit, P-R1 exit and P-R2 validation point ----
-    print(f"Feed: CH4 5%, H2O 20%, He 75% | furnace {a.T:.0f} K | {a.flow:.0f} mL/min (RTP) | "
-          f"PBR transport: {effective_transport(reactor)['configuration']} | H2 seed 1e-6 (numerical only)")
-    for c, res in results.items():
-        s = summarize(res)
-        print(f"\n{c}")
-        y3, T3, _ = point_at_pr2(res, a.pr2_mm)
-        for sec, y, T in (("PBR exit", s["PBR"]["y"], s["PBR"]["T"]), ("P-R1 exit", s["PR1"]["y"], s["PR1"]["T"]),
-                          (f"P-R2 @{a.pr2_mm:g} mm", y3, T3)):
-            print(f"  {sec:14s} CH4={y[iCH4]:.4f} H2O={y[iH2O]:.4f} CO={y[iCO]:.4f} CO2={y[iCO2]:.4f} "
-                  f"H2={y[iH2]:.4f} He={y[iHe]:.4f} T={T:.1f} K")
-        print(f"  X_CH4={s['X_CH4']:.3f}  max|atom err|={max(abs(v) for v in s['atom_err'].values()):.1e}  "
-              f"Tmin(PBR)={res['PBR'][1][6].min():.1f} K")
+        # ---- simulate -------------------------------------------------------------------------
+        cats = [a.catalyst] if a.catalyst else ["HMMC", "57-4Q", "25-4Q"]
+        results = {c: run(c, Tf=a.T, flow=a.flow, reactor=reactor) for c in cats}
 
-    # ---- figures and summary table --------------------------------------------------------
-    plot_results(results, P("01_smr_results.png"), f"SMR, furnace {a.T:.0f} K, {a.flow:.0f} mL/min",
-                 a.pr2_mm, a.with_pr1)
-    for c, res in results.items():
-        plot_axial_heatmaps(res, P(f"02_axial_fields_{c}.png"), c, a.pr2_mm, a.with_pr1)
-    write_summary(results, P("smr_summary.csv"), a.pr2_mm)
+        # ---- console report: compositions at PBR exit, P-R1 exit and P-R2 validation point ----
+        print(f"Feed: CH4 5%, H2O 20%, He 75% | furnace {a.T:.0f} K | {a.flow:.0f} mL/min (RTP) | "
+              f"PBR transport: {effective_transport(reactor)['configuration']} | H2 seed 1e-6 (numerical only)")
+        for c, res in results.items():
+            s = summarize(res)
+            print(f"\n{c}")
+            y3, T3, _ = point_at_pr2(res, a.pr2_mm)
+            for sec, y, T in (("PBR exit", s["PBR"]["y"], s["PBR"]["T"]), ("P-R1 exit", s["PR1"]["y"], s["PR1"]["T"]),
+                              (f"P-R2 @{a.pr2_mm:g} mm", y3, T3)):
+                print(f"  {sec:14s} CH4={y[iCH4]:.4f} H2O={y[iH2O]:.4f} CO={y[iCO]:.4f} CO2={y[iCO2]:.4f} "
+                      f"H2={y[iH2]:.4f} He={y[iHe]:.4f} T={T:.1f} K")
+            print(f"  X_CH4={s['X_CH4']:.3f}  max|atom err|={max(abs(v) for v in s['atom_err'].values()):.1e}  "
+                  f"Tmin(PBR)={res['PBR'][1][6].min():.1f} K")
 
-    # ---- optional studies -----------------------------------------------------------------
-    if a.seed_study:
-        seed_sensitivity(cats[0], Tf=a.T, flow=a.flow, reactor=reactor)
-    if a.validate:                                     # validation is a separate, mandatory step for the assignment
-        import validation
-        validation.main(out=a.out)
-    else:
-        print("\nNote: quantitative validation vs the paper is done by validation.py "
-              "(or run this script with --validate).")
-    print(f"\nFigures/CSV written to {os.path.abspath(a.out)}")
+        # ---- figures and summary table --------------------------------------------------------
+        plot_results(results, P("01_smr_results.png"), f"SMR, furnace {a.T:.0f} K, {a.flow:.0f} mL/min",
+                     a.pr2_mm, a.with_pr1)
+        for c, res in results.items():
+            plot_axial_heatmaps(res, P(f"02_axial_fields_{c}.png"), c, a.pr2_mm, a.with_pr1)
+        write_summary(results, P("smr_summary.csv"), a.pr2_mm)
+
+        # ---- optional studies -----------------------------------------------------------------
+        if a.seed_study:
+            seed_sensitivity(cats[0], Tf=a.T, flow=a.flow, reactor=reactor)
+        if a.validate:                                     # validation is a separate, mandatory step for the assignment
+            import validation
+            validation.main(out=os.path.join(a.out, "fixed_reference"))
+        else:
+            print("\nNote: quantitative validation vs the paper is done by validation.py "
+                  "(or run this script with --validate).")
+        print(f"\nFigures/CSV written to {os.path.abspath(a.out)}")
 
 
 if __name__ == "__main__":
